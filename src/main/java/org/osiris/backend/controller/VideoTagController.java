@@ -1,12 +1,10 @@
 package org.osiris.backend.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.osiris.backend.dto.STResDTO;
 import org.osiris.backend.dto.TagDTO;
 import org.osiris.backend.entity.VideoTag;
 import org.osiris.backend.service.VideoTagService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,16 +24,6 @@ public class VideoTagController {
     public VideoTagController(VideoTagService videoTagService) {
         this.videoTagService = videoTagService;
         this.sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    }
-
-//    @GetMapping("/getSelectList")
-//    public List<VideoType> getSelectList() {
-//        return videoService.getSelectList();
-//    }
-
-    @GetMapping("/hi")
-    public String getHi() {
-        return "Hi";
     }
 
     @PostMapping
@@ -65,6 +53,11 @@ public class VideoTagController {
     @GetMapping("/get_by_page")
     public STResDTO getByPage(@RequestParam(value = "pi", required = false, defaultValue = "1") Integer pi, @RequestParam(value = "ps", required = false, defaultValue = "10") Integer ps) {
         return videoTagService.getByPage(pi, ps);
+    }
+
+    @GetMapping("/getSelectAll")
+    public List<VideoTag> getSelectAll() {
+        return videoTagService.getSelectAll();
     }
 
 }
