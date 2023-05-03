@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.util.Date;
 
+@TableName("Video")
 @Data
 public class Video {
     private Integer id;

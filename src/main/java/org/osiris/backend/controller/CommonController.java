@@ -35,8 +35,13 @@ public class CommonController {
         return "Hi";
     }
 
+//    @GetMapping("/init")
+//    public InitDTO appInit() {
+//        return new InitDTO("Hello Ash");
+//    }
+
     @GetMapping("/init")
-    public InitDTO appInit() {
-        return new InitDTO("Hello Ash");
+    public boolean appInit() {
+        return true;
     }
 }
