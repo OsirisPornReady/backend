@@ -14,11 +14,6 @@ public class CommonService {
     public List<VideoType> getSelectList() {
 
         List<VideoType> list = new ArrayList<>();
-
-//        list.add(new VideoType("Japanese", "1"));
-//        list.add(new VideoType("Westworld", "2"));
-//        list.add(new VideoType("Chinese", "3"));
-
         return list;
     }
 

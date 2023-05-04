@@ -4,24 +4,22 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 
 import org.osiris.backend.dto.STResDTO;
-import org.osiris.backend.entity.VideoTag;
-import org.osiris.backend.mapper.VideoTagMapper;
-import org.osiris.backend.service.VideoTagService;
-
-import java.util.List;
+import org.osiris.backend.entity.Area;
+import org.osiris.backend.mapper.AreaMapper;
+import org.osiris.backend.service.AreaService;
+import org.springframework.stereotype.Service;
 
 
 @Service
-public class VideoTagServiceImpl extends ServiceImpl<VideoTagMapper, VideoTag> implements VideoTagService {
+public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements AreaService {
 
     @Override
     public STResDTO getByPage(Integer pi, Integer ps) {
-        Page<VideoTag> page = new Page<>(pi, ps);
-        QueryWrapper<VideoTag> queryWrapper = new QueryWrapper<>();
-        IPage<VideoTag> ipage = this.page(page, queryWrapper);
+        Page<Area> page = new Page<>(pi, ps);
+        QueryWrapper<Area> queryWrapper = new QueryWrapper<>();
+        IPage<Area> ipage = this.page(page, queryWrapper);
         STResDTO stRes = new STResDTO();
         stRes.setList(ipage.getRecords());
         stRes.setTotal(ipage.getTotal());

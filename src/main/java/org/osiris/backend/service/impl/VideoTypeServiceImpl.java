@@ -7,21 +7,21 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import org.osiris.backend.dto.STResDTO;
-import org.osiris.backend.entity.VideoTag;
-import org.osiris.backend.mapper.VideoTagMapper;
-import org.osiris.backend.service.VideoTagService;
+import org.osiris.backend.entity.VideoType;
+import org.osiris.backend.mapper.VideoTypeMapper;
+import org.osiris.backend.service.VideoTypeService;
 
 import java.util.List;
 
 
 @Service
-public class VideoTagServiceImpl extends ServiceImpl<VideoTagMapper, VideoTag> implements VideoTagService {
+public class VideoTypeServiceImpl extends ServiceImpl<VideoTypeMapper, VideoType> implements VideoTypeService {
 
     @Override
     public STResDTO getByPage(Integer pi, Integer ps) {
-        Page<VideoTag> page = new Page<>(pi, ps);
-        QueryWrapper<VideoTag> queryWrapper = new QueryWrapper<>();
-        IPage<VideoTag> ipage = this.page(page, queryWrapper);
+        Page<VideoType> page = new Page<>(pi, ps);
+        QueryWrapper<VideoType> queryWrapper = new QueryWrapper<>();
+        IPage<VideoType> ipage = this.page(page, queryWrapper);
         STResDTO stRes = new STResDTO();
         stRes.setList(ipage.getRecords());
         stRes.setTotal(ipage.getTotal());

@@ -1,5 +1,8 @@
 package org.osiris.backend.controller;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.update.Update;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.osiris.backend.dto.STResDTO;
 import org.osiris.backend.dto.TagDTO;
 import org.osiris.backend.entity.VideoTag;
@@ -35,19 +38,25 @@ public class VideoTagController {
         videoTagService.save(videoTag);
     }
 
-    @PutMapping
-    public void update(@RequestBody TagDTO tag) {
-        System.out.println(tag);
+    @PutMapping("/{id}")
+    public void update(@PathVariable Integer id, @RequestBody TagDTO tag) {
+        UpdateWrapper<VideoTag> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("id", id);
+        VideoTag videoTag = new VideoTag();
+        videoTag.setTag(tag.getTag());
+        videoTag.setRefCount(0);
+        videoTag.setUpdateTime(sdf.format(new Date()));
+        videoTagService.update(videoTag, updateWrapper);
     }
 
-    @DeleteMapping
-    public void delete(@RequestBody TagDTO tag) {
-        System.out.println(tag);
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id) {
+        videoTagService.removeById(id);
     }
 
-    @GetMapping
-    public void get(@RequestBody TagDTO tag) {
-        System.out.println(tag);
+    @GetMapping("/{id}")
+    public VideoTag get(@PathVariable Integer id) {
+        return videoTagService.getById(id);
     }
 
     @GetMapping("/get_by_page")
@@ -57,7 +66,7 @@ public class VideoTagController {
 
     @GetMapping("/getSelectAll")
     public List<VideoTag> getSelectAll() {
-        return videoTagService.getSelectAll();
+        return videoTagService.list();
     }
 
 }
