@@ -3,8 +3,12 @@ package org.osiris.backend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import org.osiris.backend.dto.STResDTO;
+import org.osiris.backend.dto.VideoDTO;
 import org.osiris.backend.entity.Video;
 import org.osiris.backend.service.VideoService;
+
+import java.util.List;
 
 
 @RestController
@@ -19,20 +23,30 @@ public class VideoController {
         this.videoService = videoService;
     }
 
-//    @GetMapping("/getSelectList")
-//    public List<VideoType> getSelectList() {
-//        return videoService.getSelectList();
-//    }
+    @PostMapping
+    public void add(@RequestBody VideoDTO videoDTO) { videoService.addVideo(videoDTO); }
 
-    @GetMapping("/hi")
-    public String getHi() {
-        return "Hi";
+    @PutMapping("/{id}")
+    public void update(@PathVariable Integer id, @RequestBody VideoDTO videoDTO) { videoService.updateVideo(videoDTO, id); }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id) { videoService.removeById(id); }
+
+    @GetMapping("/{id}")
+    public VideoDTO getById(@PathVariable Integer id) {
+        return videoService.getDTOById(id);
     }
 
-    @PostMapping("/add")
-    public void add(@RequestBody Video video) {
-        System.out.println(video);
-//        this.videoService.add();
+    @GetMapping("/get_by_page")
+    public STResDTO getByPage(@RequestParam(value = "pi", required = false, defaultValue = "1") Integer pi, @RequestParam(value = "ps", required = false, defaultValue = "10") Integer ps) {
+        return videoService.getByPage(pi, ps);
     }
+
+    @GetMapping("/getSelectAll")
+    public List<Video> getSelectAll() {
+        return videoService.list();
+    }
+
+
 
 }
