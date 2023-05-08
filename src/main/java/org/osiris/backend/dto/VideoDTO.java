@@ -9,9 +9,11 @@ import java.util.List;
 public class VideoDTO {
     private Integer id;
     private String title;
+    private boolean onStorage;
     private boolean existSerialNumber;
     private String serialNumber;
     private Integer videoType;
+    private Integer videoResolution;
     private Date publishTime;
     private Integer duration;
     private String director;

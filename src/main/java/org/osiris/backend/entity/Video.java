@@ -15,12 +15,16 @@ public class Video {
     @TableId(type = IdType.AUTO)
     private Integer id;
     private String title;
+    @TableField("onStorage")
+    private boolean onStorage;
     @TableField("existSerialNumber")
     private boolean existSerialNumber;
     @TableField("serialNumber")
     private String serialNumber;
     @TableField("videoType")
     private Integer videoType;
+    @TableField("videoResolution")
+    private Integer videoResolution;
     @TableField("publishTime")
     private String publishTime;
     private Integer duration;
