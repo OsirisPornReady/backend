@@ -38,8 +38,15 @@ public class VideoController {
     }
 
     @GetMapping("/get_by_page")
-    public STResDTO getByPage(@RequestParam(value = "pi", required = false, defaultValue = "1") Integer pi, @RequestParam(value = "ps", required = false, defaultValue = "10") Integer ps) {
-        return videoService.getByPage(pi, ps);
+    public STResDTO getByPage(
+                @RequestParam(value = "pi", required = false, defaultValue = "1") Integer pi,
+                @RequestParam(value = "ps", required = false, defaultValue = "10") Integer ps,
+                @RequestParam(value = "sort", required = false) String sort,
+                @RequestParam(value = "keyword", required = false) String keyword,
+                @RequestParam(value = "serialNumber", required = false) String serialNumber,
+                @RequestParam(value = "publishTime", required = false) String publishTime
+                            ) {
+        return videoService.getByPage(pi, ps, sort, keyword, serialNumber, publishTime);
     }
 
     @GetMapping("/getSelectAll")
@@ -47,6 +54,13 @@ public class VideoController {
         return videoService.list();
     }
 
+    @GetMapping("/isSerialNumberExist/{serialNumber}")
+    public boolean isSerialNumberExist(@PathVariable String serialNumber) {
+        return videoService.isSerialNumberExist(serialNumber);
+    }
 
-
+    @GetMapping("/switchVideoSubscription/{id}")
+    public void switchVideoSubscription(@PathVariable Integer id) {
+        videoService.switchVideoSubscription(id);
+    }
 }

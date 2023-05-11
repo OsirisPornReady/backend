@@ -25,4 +25,5 @@ public class VideoDTO {
     private List<Integer> tags;
     private List<Integer> stars;
     private String description;
+    private boolean onSubscription;
 }

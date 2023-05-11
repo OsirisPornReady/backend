@@ -6,4 +6,5 @@ import lombok.Data;
 public class TagDTO {
     private Integer id;
     private String tag;
+    private String tagChinese;
 }

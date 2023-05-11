@@ -9,8 +9,10 @@ import org.osiris.backend.entity.Video;
 public interface VideoService extends IService<Video> {
     public Video dto2entity(VideoDTO videoDTO);
     public VideoDTO entity2dto(Video video);
-    public STResDTO getByPage(Integer pi, Integer ps);
+    public STResDTO getByPage(Integer pi, Integer ps, String sort, String keyword, String serialNumber, String publishTime);
     public void addVideo(VideoDTO videoDTO);
     public void updateVideo(VideoDTO videoDTO, Integer id);
     public VideoDTO getDTOById(Integer id);
+    public boolean isSerialNumberExist(String serialNumber);
+    public void switchVideoSubscription(Integer id);
 }

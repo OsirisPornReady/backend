@@ -6,11 +6,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
+import org.osiris.backend.utils.StringManipUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import org.osiris.backend.dto.STResDTO;
 import org.osiris.backend.entity.Video;
@@ -55,9 +57,28 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     }
 
     @Override
-    public STResDTO getByPage(Integer pi, Integer ps) {
+    public STResDTO getByPage(Integer pi, Integer ps, String sort, String keyword, String serialNumber, String publishTime) {
         Page<Video> page = new Page<>(pi, ps);
         QueryWrapper<Video> queryWrapper = new QueryWrapper<>();
+        if (sort != null) {
+            List<String> list = StringManipUtils.splitSort(sort);
+            if (list.size() == 2) {
+                if (Objects.equals(list.get(1), "desc")) {
+                    queryWrapper.orderByDesc(list.get(0));
+                } else if (Objects.equals(list.get(1), "asc")) {
+                    queryWrapper.orderByAsc(list.get(0));
+                }
+            }
+        }
+        if (keyword != null) {
+            queryWrapper.like("title", keyword);
+        }
+        if (serialNumber != null) {
+            queryWrapper.like("serialNumber", serialNumber);
+        }
+        if (publishTime != null) {
+            queryWrapper.like("publishTime", publishTime);
+        }
         IPage<Video> ipage = this.page(page, queryWrapper);
         ipage.convert(this::entity2dto); //如果逻辑复杂一点还可以写成lambda表达式
         STResDTO stRes = new STResDTO();
@@ -83,4 +104,23 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         return entity2dto(this.getById(id));
     }
 
+    @Override
+    public boolean isSerialNumberExist(String serialNumber) {
+        QueryWrapper<Video> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(Video::getSerialNumber, serialNumber);
+        List<Video> list = this.list(queryWrapper);
+        return list.size() > 0;
+    }
+
+    @Override
+    public void switchVideoSubscription(Integer id) {
+        Video video = this.getById(id);
+        if (video != null) {
+            boolean onSubscription = video.isOnSubscription();
+            UpdateWrapper<Video> updateWrapper = new UpdateWrapper<>();
+            updateWrapper.eq("id", id)
+                    .set("onSubscription", !onSubscription);
+            this.update(updateWrapper);
+        }
+    }
 }

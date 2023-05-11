@@ -18,4 +18,6 @@ public class VideoTag {
     private Integer refCount;
     @TableField("updateTime")
     private String updateTime;
+    @TableField("tagChinese")
+    private String tagChinese;
 }

@@ -8,6 +8,7 @@ import org.osiris.backend.dto.TagDTO;
 import org.osiris.backend.entity.VideoTag;
 import org.osiris.backend.service.VideoTagService;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,7 @@ public class VideoTagController {
     @PostMapping
     public void add(@RequestBody TagDTO tag) {
         VideoTag videoTag = new VideoTag();
-        videoTag.setTag(tag.getTag());
+        BeanUtils.copyProperties(tag, videoTag);
         videoTag.setRefCount(0);
         videoTag.setUpdateTime(sdf.format(new Date()));
         videoTagService.save(videoTag);
@@ -43,7 +44,7 @@ public class VideoTagController {
         UpdateWrapper<VideoTag> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("id", id);
         VideoTag videoTag = new VideoTag();
-        videoTag.setTag(tag.getTag());
+        BeanUtils.copyProperties(tag, videoTag);
         videoTag.setRefCount(0);
         videoTag.setUpdateTime(sdf.format(new Date()));
         videoTagService.update(videoTag, updateWrapper);

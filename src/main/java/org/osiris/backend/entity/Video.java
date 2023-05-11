@@ -38,4 +38,6 @@ public class Video {
     private String tags;
     private String stars;
     private String description;
+    @TableField("onSubscription")
+    private boolean onSubscription;
 }
