@@ -32,6 +32,9 @@ public class VideoController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) { videoService.removeById(id); }
 
+    @PostMapping("/bulk_delete")
+    public void bulkDelete(@RequestBody List<Integer> ids) { videoService.removeByIds(ids); }
+
     @GetMapping("/{id}")
     public VideoDTO getById(@PathVariable Integer id) {
         return videoService.getDTOById(id);
