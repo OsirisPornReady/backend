@@ -35,3 +35,19 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.register('copyBootJar') {
+//    mustRunAfter(tasks.named('bootJar')) //没啥用,因为生成文件是异步的
+    copy {
+        from("build/libs")
+        into("../osiris.deployment/backend")
+        include("*.jar")
+    }
+    println("Backend deployment success")
+}
+
+tasks.register('deployBackend') {
+    bootJar.setArchiveBaseName('osiris.backend')
+    bootJar.destinationDirectory.set(file('../osiris.deployment/backend'))
+    finalizedBy(bootJar)
+}
