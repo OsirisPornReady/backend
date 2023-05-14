@@ -25,7 +25,7 @@ public class CommonController {
         this.commonService = commonService;
     }
 
-    @GetMapping("/getSelectList")
+    @GetMapping("/get_select_list")
     public List<VideoType> getSelectList() {
         return commonService.getSelectList();
     }

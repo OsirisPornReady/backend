@@ -52,17 +52,17 @@ public class VideoController {
         return videoService.getByPage(pi, ps, sort, keyword, serialNumber, publishTime);
     }
 
-    @GetMapping("/getSelectAll")
+    @GetMapping("/get_select_all")
     public List<Video> getSelectAll() {
         return videoService.list();
     }
 
-    @GetMapping("/isSerialNumberExist/{serialNumber}")
+    @GetMapping("/is_serial_number_exist/{serialNumber}")
     public boolean isSerialNumberExist(@PathVariable String serialNumber) {
         return videoService.isSerialNumberExist(serialNumber);
     }
 
-    @GetMapping("/switchVideoSubscription/{id}")
+    @GetMapping("/switch_video_subscription/{id}")
     public void switchVideoSubscription(@PathVariable Integer id) {
         videoService.switchVideoSubscription(id);
     }

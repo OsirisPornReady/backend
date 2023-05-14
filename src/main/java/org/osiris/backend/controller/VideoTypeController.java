@@ -53,7 +53,7 @@ public class VideoTypeController {
         return videoTypeService.getByPage(pi, ps);
     }
 
-    @GetMapping("/getSelectAll")
+    @GetMapping("/get_select_all")
     public List<VideoType> getSelectAll() {
         return videoTypeService.list();
     }

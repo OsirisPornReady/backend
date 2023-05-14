@@ -65,7 +65,7 @@ public class VideoTagController {
         return videoTagService.getByPage(pi, ps);
     }
 
-    @GetMapping("/getSelectAll")
+    @GetMapping("/get_select_all")
     public List<VideoTag> getSelectAll() {
         return videoTagService.list();
     }

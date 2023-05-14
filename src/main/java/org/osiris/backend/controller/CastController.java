@@ -42,7 +42,7 @@ public class CastController {
         return castService.getByPage(pi, ps);
     }
 
-    @GetMapping("/getSelectAll")
+    @GetMapping("/get_select_all")
     public List<Star> getSelectAll() {
         return castService.list();
     }

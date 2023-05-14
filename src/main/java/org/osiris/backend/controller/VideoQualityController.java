@@ -63,12 +63,12 @@ public class VideoQualityController {
         return videoQualityService.getByPage(pi, ps);
     }
 
-    @GetMapping("/getSelectAll")
+    @GetMapping("/get_select_all")
     public List<VideoQuality> getSelectAll() {
         return videoQualityService.list();
     }
 
-    @GetMapping("/getDict")
+    @GetMapping("/get_dict")
     public List<VideoQuality> getDict() {
 //        return videoQualityService.getDict();
         return videoQualityService.list();

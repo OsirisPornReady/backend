@@ -51,7 +51,7 @@ public class AreaController {
         return areaService.getByPage(pi, ps);
     }
 
-    @GetMapping("/getSelectAll")
+    @GetMapping("/get_select_all")
     public List<Area> getSelectAll() {
         return areaService.list();
     }
