@@ -16,7 +16,16 @@ public class ArrayConvertUtils {
         } else {
             return null;
         }
+    }
 
+    public static List<String> string2stringlist(String source) {
+        if (source != null) {
+            return Arrays.stream(source.split(","))
+                    .map(String::trim)
+                    .collect(Collectors.toList());
+        } else {
+            return null;
+        }
     }
 
     public static String list2string(List<Integer> source) {
@@ -25,6 +34,14 @@ public class ArrayConvertUtils {
                     .map(String::valueOf)
                     .collect(Collectors.toList());
             return String.join(",", list);
+        } else {
+            return null;
+        }
+    }
+
+    public static String liststring2string(List<String> source) {
+        if (source != null) {
+            return String.join(",", source);
         } else {
             return null;
         }

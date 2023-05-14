@@ -31,14 +31,20 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     public Video dto2entity(VideoDTO videoDTO) {
         Video video = new Video();
 
-        BeanUtils.copyProperties(videoDTO, video, "publishTime", "tags", "stars");
+        BeanUtils.copyProperties(videoDTO, video, "publishTime", "series", "tags", "stars", "tagsRaw", "starsRaw");
 
         String tags = ArrayConvertUtils.list2string(videoDTO.getTags());
         String stars = ArrayConvertUtils.list2string(videoDTO.getStars());
+        String tagsRaw = ArrayConvertUtils.liststring2string(videoDTO.getTagsRaw());
+        String starsRaw = ArrayConvertUtils.liststring2string(videoDTO.getStarsRaw());
+        String series = ArrayConvertUtils.liststring2string(videoDTO.getSeries());
         String publishTime = DateConvertUtils.date2string(videoDTO.getPublishTime());
 
         video.setTags(tags);
         video.setStars(stars);
+        video.setTagsRaw(tagsRaw);
+        video.setStarsRaw(starsRaw);
+        video.setSeries(series);
         video.setPublishTime(publishTime);
         return video;
     }
@@ -46,12 +52,18 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     @Override
     public VideoDTO entity2dto(Video video) {
         VideoDTO videoDTO = new VideoDTO();
-        BeanUtils.copyProperties(video, videoDTO, "publishTime", "tags", "stars");
+        BeanUtils.copyProperties(video, videoDTO, "publishTime", "series", "tags", "stars", "tagsRaw", "starsRaw");
         List<Integer> tags = ArrayConvertUtils.string2list(video.getTags());
         List<Integer> stars = ArrayConvertUtils.string2list(video.getStars());
+        List<String> tagsRaw = ArrayConvertUtils.string2stringlist(video.getTagsRaw());
+        List<String> starsRaw = ArrayConvertUtils.string2stringlist(video.getStarsRaw());
+        List<String> series = ArrayConvertUtils.string2stringlist(video.getSeries());
         Date publishTime = DateConvertUtils.string2date(video.getPublishTime());
         videoDTO.setTags(tags);
         videoDTO.setStars(stars);
+        videoDTO.setTagsRaw(tagsRaw);
+        videoDTO.setStarsRaw(starsRaw);
+        videoDTO.setSeries(series);
         videoDTO.setPublishTime(publishTime);
         return videoDTO;
     }

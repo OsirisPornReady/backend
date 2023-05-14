@@ -37,6 +37,10 @@ public class Video {
     private String series;
     private String tags;
     private String stars;
+    @TableField("tagsRaw")
+    private String tagsRaw;
+    @TableField("starsRaw")
+    private String starsRaw;
     private String description;
     @TableField("onSubscription")
     private boolean onSubscription;

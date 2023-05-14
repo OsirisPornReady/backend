@@ -21,9 +21,11 @@ public class VideoDTO {
     private String releaser;
     private String brand;
     private boolean inSeries;
-    private String series;
+    private List<String> series;
     private List<Integer> tags;
     private List<Integer> stars;
+    private List<String> tagsRaw;
+    private List<String> starsRaw;
     private String description;
     private boolean onSubscription;
 }
