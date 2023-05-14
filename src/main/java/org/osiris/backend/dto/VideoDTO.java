@@ -9,8 +9,8 @@ import java.util.List;
 public class VideoDTO {
     private Integer id;
     private String title;
-    private boolean onStorage;
-    private boolean existSerialNumber;
+    private Boolean onStorage;
+    private Boolean existSerialNumber;
     private String serialNumber;
     private Integer videoType;
     private Integer videoResolution;
@@ -20,12 +20,15 @@ public class VideoDTO {
     private String producer;
     private String releaser;
     private String brand;
-    private boolean inSeries;
+    private Boolean inSeries;
     private List<String> series;
     private List<Integer> tags;
     private List<Integer> stars;
     private List<String> tagsRaw;
     private List<String> starsRaw;
     private String description;
-    private boolean onSubscription;
+    private Boolean onSubscription;
+    private Boolean canCrawl;
+    private Integer crawlType;
+    private String crawlKey;
 }

@@ -13,6 +13,7 @@ public interface VideoService extends IService<Video> {
     public void addVideo(VideoDTO videoDTO);
     public void updateVideo(VideoDTO videoDTO, Integer id);
     public VideoDTO getDTOById(Integer id);
-    public boolean isSerialNumberExist(String serialNumber);
+    public Boolean isSerialNumberExist(String serialNumber);
+    public Boolean isTitleExist(String title);
     public void switchVideoSubscription(Integer id);
 }

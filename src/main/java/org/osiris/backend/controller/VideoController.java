@@ -58,8 +58,13 @@ public class VideoController {
     }
 
     @GetMapping("/is_serial_number_exist/{serialNumber}")
-    public boolean isSerialNumberExist(@PathVariable String serialNumber) {
+    public Boolean isSerialNumberExist(@PathVariable String serialNumber) {
         return videoService.isSerialNumberExist(serialNumber);
+    }
+
+    @PostMapping("/is_title_exist")
+    public Boolean isTitleExist(@RequestBody String title) {
+        return videoService.isTitleExist(title);
     }
 
     @GetMapping("/switch_video_subscription/{id}")

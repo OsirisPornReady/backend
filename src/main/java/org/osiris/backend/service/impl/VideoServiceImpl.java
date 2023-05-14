@@ -117,9 +117,17 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     }
 
     @Override
-    public boolean isSerialNumberExist(String serialNumber) {
+    public Boolean isSerialNumberExist(String serialNumber) {
         QueryWrapper<Video> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(Video::getSerialNumber, serialNumber);
+        List<Video> list = this.list(queryWrapper);
+        return list.size() > 0;
+    }
+
+    @Override
+    public Boolean isTitleExist(String title) {
+        QueryWrapper<Video> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(Video::getTitle, title);
         List<Video> list = this.list(queryWrapper);
         return list.size() > 0;
     }
@@ -128,7 +136,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     public void switchVideoSubscription(Integer id) {
         Video video = this.getById(id);
         if (video != null) {
-            boolean onSubscription = video.isOnSubscription();
+            Boolean onSubscription = video.getOnSubscription();
             UpdateWrapper<Video> updateWrapper = new UpdateWrapper<>();
             updateWrapper.eq("id", id)
                     .set("onSubscription", !onSubscription);

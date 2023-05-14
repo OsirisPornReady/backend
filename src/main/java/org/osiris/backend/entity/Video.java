@@ -16,9 +16,9 @@ public class Video {
     private Integer id;
     private String title;
     @TableField("onStorage")
-    private boolean onStorage;
+    private Boolean onStorage;
     @TableField("existSerialNumber")
-    private boolean existSerialNumber;
+    private Boolean existSerialNumber;
     @TableField("serialNumber")
     private String serialNumber;
     @TableField("videoType")
@@ -33,7 +33,7 @@ public class Video {
     private String releaser;
     private String brand;
     @TableField("inSeries")
-    private boolean inSeries;
+    private Boolean inSeries;
     private String series;
     private String tags;
     private String stars;
@@ -43,5 +43,11 @@ public class Video {
     private String starsRaw;
     private String description;
     @TableField("onSubscription")
-    private boolean onSubscription;
+    private Boolean onSubscription;
+    @TableField("canCrawl")
+    private Boolean canCrawl;
+    @TableField("crawlType")
+    private Integer crawlType;
+    @TableField("crawlKey")
+    private String crawlKey;
 }

@@ -41,7 +41,7 @@ public class CommonController {
 //    }
 
     @GetMapping("/init")
-    public boolean appInit() {
+    public Boolean appInit() {
         return true;
     }
 }
