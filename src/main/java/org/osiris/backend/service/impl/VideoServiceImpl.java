@@ -137,9 +137,15 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         Video video = this.getById(id);
         if (video != null) {
             Boolean onSubscription = video.getOnSubscription();
+            Boolean newValue;
+            if (onSubscription == null || onSubscription == false) {
+                newValue = false;
+            } else {
+                newValue = true;
+            }
             UpdateWrapper<Video> updateWrapper = new UpdateWrapper<>();
             updateWrapper.eq("id", id)
-                    .set("onSubscription", !onSubscription);
+                    .set("onSubscription", newValue);
             this.update(updateWrapper);
         }
     }
