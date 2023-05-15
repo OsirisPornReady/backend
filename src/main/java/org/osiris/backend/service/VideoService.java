@@ -5,11 +5,13 @@ import org.osiris.backend.dto.STResDTO;
 import org.osiris.backend.dto.VideoDTO;
 import org.osiris.backend.entity.Video;
 
+import java.util.List;
+
 
 public interface VideoService extends IService<Video> {
     public Video dto2entity(VideoDTO videoDTO);
     public VideoDTO entity2dto(Video video);
-    public STResDTO getByPage(Integer pi, Integer ps, String sort, String keyword, String serialNumber, String publishTime);
+    public STResDTO getByPage(Integer pi, Integer ps, List<String> sort, String defaultSort, String keyword, String serialNumber, String publishTime);
     public void addVideo(VideoDTO videoDTO);
     public void updateVideo(VideoDTO videoDTO, Integer id);
     public VideoDTO getDTOById(Integer id);

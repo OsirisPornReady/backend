@@ -77,16 +77,28 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     }
 
     @Override
-    public STResDTO getByPage(Integer pi, Integer ps, String sort, String keyword, String serialNumber, String publishTime) {
+    public STResDTO getByPage(Integer pi, Integer ps, List<String> sort, String defaultSort, String keyword, String serialNumber, String publishTime) {
         Page<Video> page = new Page<>(pi, ps);
         QueryWrapper<Video> queryWrapper = new QueryWrapper<>();
         if (sort != null) {
-            List<String> list = StringManipUtils.splitSort(sort);
-            if (list.size() == 2) {
-                if (Objects.equals(list.get(1), "desc")) {
-                    queryWrapper.orderByDesc(list.get(0));
-                } else if (Objects.equals(list.get(1), "asc")) {
-                    queryWrapper.orderByAsc(list.get(0));
+            sort.forEach(s -> {
+                List<String> params = StringManipUtils.splitSort(s);
+                if (params.size() == 2) {
+                    if (Objects.equals(params.get(1), "descend")) {
+                        queryWrapper.orderByDesc(params.get(0));
+                    } else if (Objects.equals(params.get(1), "ascend")) {
+                        queryWrapper.orderByAsc(params.get(0));
+                    }
+                }
+            });
+        }
+        if (defaultSort != null) {
+            List<String> params = StringManipUtils.splitSort(defaultSort);
+            if (params.size() == 2) {
+                if (Objects.equals(params.get(1), "descend")) {
+                    queryWrapper.orderByDesc(params.get(0));
+                } else if (Objects.equals(params.get(1), "ascend")) {
+                    queryWrapper.orderByAsc(params.get(0));
                 }
             }
         }

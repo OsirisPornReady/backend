@@ -51,12 +51,13 @@ public class VideoController {
     public STResDTO getByPage(
                 @RequestParam(value = "pi", required = false, defaultValue = "1") Integer pi,
                 @RequestParam(value = "ps", required = false, defaultValue = "10") Integer ps,
-                @RequestParam(value = "sort", required = false) String sort,
+                @RequestParam(value = "sort", required = false) List<String> sort,
+                @RequestParam(value = "defaultSort", required = false) String defaultSort,
                 @RequestParam(value = "keyword", required = false) String keyword,
                 @RequestParam(value = "serialNumber", required = false) String serialNumber,
                 @RequestParam(value = "publishTime", required = false) String publishTime
                             ) {
-        return videoService.getByPage(pi, ps, sort, keyword, serialNumber, publishTime);
+        return videoService.getByPage(pi, ps, sort, defaultSort, keyword, serialNumber, publishTime);
     }
 
     @GetMapping("/get_select_all")
