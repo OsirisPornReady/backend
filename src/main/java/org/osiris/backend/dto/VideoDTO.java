@@ -1,5 +1,6 @@
 package org.osiris.backend.dto;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.util.Date;
@@ -31,4 +32,6 @@ public class VideoDTO {
     private Boolean canCrawl;
     private Integer crawlType;
     private String crawlKey;
+    private Date addTime;
+    private Date updateTime;
 }

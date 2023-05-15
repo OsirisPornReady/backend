@@ -50,4 +50,8 @@ public class Video {
     private Integer crawlType;
     @TableField("crawlKey")
     private String crawlKey;
+    @TableField("addTime")
+    private String addTime;
+    @TableField("updateTime")
+    private String updateTime;
 }

@@ -8,6 +8,7 @@ import org.osiris.backend.dto.VideoDTO;
 import org.osiris.backend.entity.Video;
 import org.osiris.backend.service.VideoService;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -24,10 +25,16 @@ public class VideoController {
     }
 
     @PostMapping
-    public void add(@RequestBody VideoDTO videoDTO) { videoService.addVideo(videoDTO); }
+    public void add(@RequestBody VideoDTO videoDTO) {
+        videoDTO.setAddTime(new Date());
+        videoService.addVideo(videoDTO);
+    }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable Integer id, @RequestBody VideoDTO videoDTO) { videoService.updateVideo(videoDTO, id); }
+    public void update(@PathVariable Integer id, @RequestBody VideoDTO videoDTO) {
+        videoDTO.setUpdateTime(new Date());
+        videoService.updateVideo(videoDTO, id);
+    }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) { videoService.removeById(id); }
