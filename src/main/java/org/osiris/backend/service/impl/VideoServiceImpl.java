@@ -31,13 +31,14 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     public Video dto2entity(VideoDTO videoDTO) {
         Video video = new Video();
 
-        BeanUtils.copyProperties(videoDTO, video, "publishTime", "series", "tags", "stars", "tagsRaw", "starsRaw", "addTime", "updateTime");
+        BeanUtils.copyProperties(videoDTO, video, "publishTime", "series", "tags", "stars", "tagsRaw", "starsRaw", "addTime", "updateTime", "videoSrc");
 
         String tags = ArrayConvertUtils.list2string(videoDTO.getTags());
         String stars = ArrayConvertUtils.list2string(videoDTO.getStars());
         String tagsRaw = ArrayConvertUtils.liststring2string(videoDTO.getTagsRaw());
         String starsRaw = ArrayConvertUtils.liststring2string(videoDTO.getStarsRaw());
         String series = ArrayConvertUtils.liststring2string(videoDTO.getSeries());
+        String videoSrc = ArrayConvertUtils.liststring2string(videoDTO.getVideoSrc());
         String publishTime = DateConvertUtils.date2string(videoDTO.getPublishTime());
         String addTime = DateConvertUtils.date2string(videoDTO.getAddTime());
         String updateTime = DateConvertUtils.date2string(videoDTO.getUpdateTime());
@@ -47,6 +48,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         video.setTagsRaw(tagsRaw);
         video.setStarsRaw(starsRaw);
         video.setSeries(series);
+        video.setVideoSrc(videoSrc);
         video.setPublishTime(publishTime);
         video.setAddTime(addTime);
         video.setUpdateTime(updateTime);
@@ -56,12 +58,13 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     @Override
     public VideoDTO entity2dto(Video video) {
         VideoDTO videoDTO = new VideoDTO();
-        BeanUtils.copyProperties(video, videoDTO, "publishTime", "series", "tags", "stars", "tagsRaw", "starsRaw", "addTime", "updateTime");
+        BeanUtils.copyProperties(video, videoDTO, "publishTime", "series", "tags", "stars", "tagsRaw", "starsRaw", "addTime", "updateTime", "videoSrc");
         List<Integer> tags = ArrayConvertUtils.string2list(video.getTags());
         List<Integer> stars = ArrayConvertUtils.string2list(video.getStars());
         List<String> tagsRaw = ArrayConvertUtils.string2stringlist(video.getTagsRaw());
         List<String> starsRaw = ArrayConvertUtils.string2stringlist(video.getStarsRaw());
         List<String> series = ArrayConvertUtils.string2stringlist(video.getSeries());
+        List<String> videoSrc = ArrayConvertUtils.string2stringlist(video.getVideoSrc());
         Date publishTime = DateConvertUtils.string2date(video.getPublishTime());
         Date addTime = DateConvertUtils.string2date(video.getAddTime());
         Date updateTime = DateConvertUtils.string2date(video.getUpdateTime());
@@ -70,6 +73,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         videoDTO.setTagsRaw(tagsRaw);
         videoDTO.setStarsRaw(starsRaw);
         videoDTO.setSeries(series);
+        videoDTO.setVideoSrc(videoSrc);
         videoDTO.setPublishTime(publishTime);
         videoDTO.setAddTime(addTime);
         videoDTO.setUpdateTime(updateTime);

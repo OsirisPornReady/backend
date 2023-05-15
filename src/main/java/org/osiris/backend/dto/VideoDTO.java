@@ -34,4 +34,7 @@ public class VideoDTO {
     private String crawlKey;
     private Date addTime;
     private Date updateTime;
+    @TableField("videoSrc")
+    private List<String> videoSrc;
+    private Integer score;
 }

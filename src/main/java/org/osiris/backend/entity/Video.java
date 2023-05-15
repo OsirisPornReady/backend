@@ -54,4 +54,7 @@ public class Video {
     private String addTime;
     @TableField("updateTime")
     private String updateTime;
+    @TableField("videoSrc")
+    private String videoSrc;
+    private Integer score;
 }
