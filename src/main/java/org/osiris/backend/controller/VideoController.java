@@ -26,7 +26,9 @@ public class VideoController {
 
     @PostMapping
     public void add(@RequestBody VideoDTO videoDTO) {
-        videoDTO.setAddTime(new Date());
+        Date now = new Date();
+        videoDTO.setAddTime(now);
+        videoDTO.setUpdateTime(now);
         videoService.addVideo(videoDTO);
     }
 
