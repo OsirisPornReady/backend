@@ -159,7 +159,9 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     @Override
     public Boolean isTitleExist(String title) {
         QueryWrapper<Video> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(Video::getTitle, title);
+        queryWrapper.lambda().like(Video::getTitle, title);
+        queryWrapper.lambda().likeLeft(Video::getTitle, title);
+        queryWrapper.lambda().likeRight(Video::getTitle, title);
         List<Video> list = this.list(queryWrapper);
         return list.size() > 0;
     }
