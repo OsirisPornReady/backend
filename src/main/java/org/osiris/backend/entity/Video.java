@@ -57,4 +57,12 @@ public class Video {
     @TableField("videoSrc")
     private String videoSrc;
     private Integer score;
+    @TableField("coverSrc")
+    private String coverSrc;
+    @TableField("previewImageSrcList")
+    private String previewImageSrcList;
+    @TableField("localCoverSrc")
+    private String localCoverSrc;
+    @TableField("localPreviewImageSrcList")
+    private String localPreviewImageSrcList;
 }

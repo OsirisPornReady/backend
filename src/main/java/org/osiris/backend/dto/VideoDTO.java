@@ -34,7 +34,10 @@ public class VideoDTO {
     private String crawlKey;
     private Date addTime;
     private Date updateTime;
-    @TableField("videoSrc")
     private List<String> videoSrc;
     private Integer score;
+    private String coverSrc;
+    private List<String> previewImageSrcList;
+    private String localCoverSrc;
+    private List<String> localPreviewImageSrcList;
 }
