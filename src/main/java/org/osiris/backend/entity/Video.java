@@ -65,4 +65,8 @@ public class Video {
     private String localCoverSrc;
     @TableField("localPreviewImageSrcList")
     private String localPreviewImageSrcList;
+    @TableField("dataSourceUrl")
+    private String dataSourceUrl;
+    @TableField("btdigUrl")
+    private String btdigUrl;
 }

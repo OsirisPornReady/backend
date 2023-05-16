@@ -40,4 +40,6 @@ public class VideoDTO {
     private List<String> previewImageSrcList;
     private String localCoverSrc;
     private List<String> localPreviewImageSrcList;
+    private String dataSourceUrl;
+    private String btdigUrl;
 }
