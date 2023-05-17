@@ -42,4 +42,5 @@ public class VideoDTO {
     private List<String> localPreviewImageSrcList;
     private String dataSourceUrl;
     private String btdigUrl;
+    private String comment;
 }

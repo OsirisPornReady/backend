@@ -89,7 +89,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     }
 
     @Override
-    public STResDTO getByPage(Integer pi, Integer ps, List<String> sort, String defaultSort, String keyword, String serialNumber, String publishTime) {
+    public STResDTO getByPage(Integer pi, Integer ps, List<String> sort, String defaultSort, String title, String serialNumber, String starsRaw, String tagsRaw, String publishTimeStart, String publishTimeEnd, String addTimeStart, String addTimeEnd) {
         Page<Video> page = new Page<>(pi, ps);
         QueryWrapper<Video> queryWrapper = new QueryWrapper<>();
         if (sort != null) {
@@ -114,14 +114,33 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 }
             }
         }
-        if (keyword != null) {
-            queryWrapper.like("title", keyword);
+        if (title != null) {
+            queryWrapper.like("title", title);
         }
         if (serialNumber != null) {
             queryWrapper.like("serialNumber", serialNumber);
         }
-        if (publishTime != null) {
-            queryWrapper.like("publishTime", publishTime);
+        if (starsRaw != null) {
+            queryWrapper.like("starsRaw", starsRaw);
+        }
+        if (tagsRaw != null) {
+            queryWrapper.like("tagsRaw", tagsRaw);
+        }
+        if (publishTimeStart != null && publishTimeEnd != null) { //前端选择器就已经判断先后关系了,此处不必判断,只需判断相等
+            if (Objects.equals(publishTimeStart, publishTimeEnd)) {
+                queryWrapper.like("publishTime", publishTimeStart);
+            } else {
+                queryWrapper.ge("publishTime", publishTimeStart);
+                queryWrapper.le("publishTime", publishTimeEnd);
+            }
+        }
+        if (addTimeStart != null && addTimeEnd != null) { //前端选择器就已经判断先后关系了,此处不必判断,只需判断相等
+            if (Objects.equals(addTimeStart, addTimeEnd)) {
+                queryWrapper.like("addTime", addTimeStart);
+            } else {
+                queryWrapper.ge("addTime", addTimeStart);
+                queryWrapper.le("addTime", addTimeEnd);
+            }
         }
         IPage<Video> ipage = this.page(page, queryWrapper);
         ipage.convert(this::entity2dto); //如果逻辑复杂一点还可以写成lambda表达式
