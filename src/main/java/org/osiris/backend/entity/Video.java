@@ -69,4 +69,5 @@ public class Video {
     private String dataSourceUrl;
     @TableField("btdigUrl")
     private String btdigUrl;
+    private String comment;
 }
