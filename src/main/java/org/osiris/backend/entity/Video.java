@@ -46,8 +46,8 @@ public class Video {
     private Boolean onSubscription;
     @TableField("canCrawl")
     private Boolean canCrawl;
-    @TableField("crawlType")
-    private Integer crawlType;
+    @TableField("crawlApiUrl")
+    private String crawlApiUrl;
     @TableField("crawlKey")
     private String crawlKey;
     @TableField("addTime")

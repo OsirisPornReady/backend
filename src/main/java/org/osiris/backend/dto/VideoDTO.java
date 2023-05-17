@@ -30,7 +30,7 @@ public class VideoDTO {
     private String description;
     private Boolean onSubscription;
     private Boolean canCrawl;
-    private Integer crawlType;
+    private String crawlApiUrl;
     private String crawlKey;
     private Date addTime;
     private Date updateTime;

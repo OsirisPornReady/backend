@@ -16,4 +16,6 @@ public class CrawlType {
     private Integer crawlTypeKey;
     @TableField("isActive")
     private Boolean isActive;  //boolean似乎会把字段名改成active
+    @TableField("crawlApiUrl")
+    private String crawlApiUrl;
 }
