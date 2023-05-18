@@ -4,15 +4,20 @@ import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ArrayConvertUtils {
     public static List<Integer> string2list(String source) {
         if (source != null) {
-            return Arrays.stream(source.split(","))
-                    .map(String::trim)
-                    .map(Integer::valueOf)
-                    .collect(Collectors.toList());
+             if (Objects.equals(source, "")){
+                 return null;
+             } else {
+                 return Arrays.stream(source.split(","))
+                         .map(String::trim)
+                         .map(Integer::valueOf)
+                         .collect(Collectors.toList());
+             }
         } else {
             return null;
         }
@@ -20,9 +25,13 @@ public class ArrayConvertUtils {
 
     public static List<String> string2stringlist(String source) {
         if (source != null) {
-            return Arrays.stream(source.split(","))
-                    .map(String::trim)
-                    .collect(Collectors.toList());
+            if (Objects.equals(source, "")){
+                return null;
+            } else {
+                return Arrays.stream(source.split(","))
+                        .map(String::trim)
+                        .collect(Collectors.toList());
+            }
         } else {
             return null;
         }
@@ -30,10 +39,14 @@ public class ArrayConvertUtils {
 
     public static String list2string(List<Integer> source) {
         if (source != null) {
-            List<String> list = source.stream()
-                    .map(String::valueOf)
-                    .collect(Collectors.toList());
-            return String.join(",", list);
+            if (source.size() == 0) {
+                return "";
+            } else {
+                List<String> list = source.stream()
+                        .map(String::valueOf)
+                        .collect(Collectors.toList());
+                return String.join(",", list);
+            }
         } else {
             return null;
         }
@@ -41,7 +54,11 @@ public class ArrayConvertUtils {
 
     public static String liststring2string(List<String> source) {
         if (source != null) {
-            return String.join(",", source);
+            if (source.size() == 0) {
+                return "";
+            } else {
+                return String.join(",", source);
+            }
         } else {
             return null;
         }
