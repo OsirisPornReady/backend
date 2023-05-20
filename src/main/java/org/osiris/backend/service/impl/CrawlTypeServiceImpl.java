@@ -18,6 +18,7 @@ public class CrawlTypeServiceImpl extends ServiceImpl<CrawlTypeMapper, CrawlType
     public STResDTO getByPage(Integer pi, Integer ps) {
         Page<CrawlType> page = new Page<>(pi, ps);
         QueryWrapper<CrawlType> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByAsc("crawlTypeKey");
         IPage<CrawlType> ipage = this.page(page, queryWrapper);
         STResDTO stRes = new STResDTO();
         stRes.setList(ipage.getRecords());
