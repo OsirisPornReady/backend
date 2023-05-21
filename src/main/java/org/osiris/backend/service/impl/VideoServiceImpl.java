@@ -130,6 +130,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             if (Objects.equals(publishTimeStart, publishTimeEnd)) {
                 queryWrapper.like("publishTime", publishTimeStart);
             } else {
+                // 主动调用or表示紧接着下一个方法不是用and连接!(不调用or则默认为使用and连接)
+                // 也可以写成链式写法
                 queryWrapper.ge("publishTime", publishTimeStart);
                 queryWrapper.le("publishTime", publishTimeEnd);
             }
@@ -138,6 +140,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             if (Objects.equals(addTimeStart, addTimeEnd)) {
                 queryWrapper.like("addTime", addTimeStart);
             } else {
+                // 主动调用or表示紧接着下一个方法不是用and连接!(不调用or则默认为使用and连接)
+                // 也可以写成链式写法
                 queryWrapper.ge("addTime", addTimeStart);
                 queryWrapper.le("addTime", addTimeEnd);
             }

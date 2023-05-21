@@ -3,6 +3,7 @@ package org.osiris.backend.controller;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.osiris.backend.dto.STResDTO;
 import org.osiris.backend.dto.VideoAlbumDTO;
+import org.osiris.backend.dto.VideoCollectDTO;
 import org.osiris.backend.entity.VideoAlbum;
 import org.osiris.backend.entity.VideoType;
 import org.osiris.backend.service.VideoAlbumService;
@@ -50,5 +51,12 @@ public class VideoAlbumController {
     public List<VideoAlbum> getSelectAll() {
         return videoAlbumService.list();
     }
+
+    @PostMapping("/collect_video/{id}")
+    public void collectVideo(@PathVariable Integer id, @RequestBody VideoCollectDTO videoCollectDTO) { videoAlbumService.collectVideo(id, videoCollectDTO); }
+
+    @GetMapping("/get_album_collected_video/{id}")
+    public List<VideoAlbum> getAlbumCollectedVideo(@PathVariable Integer id) { return videoAlbumService.getAlbumCollectedVideo(id); }
+
 
 }
