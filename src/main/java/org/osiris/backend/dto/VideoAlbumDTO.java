@@ -8,5 +8,5 @@ import java.util.List;
 public class VideoAlbumDTO {
     private Integer id;
     private String albumName;
-    private List<Integer> videoList;
+    private List<Integer> albumVideoList;
 }

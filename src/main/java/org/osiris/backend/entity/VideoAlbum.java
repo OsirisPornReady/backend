@@ -13,6 +13,6 @@ public class VideoAlbum {
     private Integer id;
     @TableField("albumName")
     private String albumName;
-    @TableField("videoList")
-    private String videoList;
+    @TableField("albumVideoList")
+    private String albumVideoList;
 }

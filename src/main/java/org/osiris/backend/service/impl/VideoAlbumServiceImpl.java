@@ -23,18 +23,18 @@ public class VideoAlbumServiceImpl extends ServiceImpl<VideoAlbumMapper, VideoAl
     @Override
     public VideoAlbum dto2entity(VideoAlbumDTO videoAlbumDTO) {
         VideoAlbum videoAlbum = new VideoAlbum();
-        BeanUtils.copyProperties(videoAlbumDTO, videoAlbum, "videoList");
-        String videoList = ArrayConvertUtils.list2string(videoAlbumDTO.getVideoList());
-        videoAlbum.setVideoList(videoList);
+        BeanUtils.copyProperties(videoAlbumDTO, videoAlbum, "albumVideoList");
+        String albumVideoList = ArrayConvertUtils.list2string(videoAlbumDTO.getAlbumVideoList());
+        videoAlbum.setAlbumVideoList(albumVideoList);
         return videoAlbum;
     }
 
     @Override
     public VideoAlbumDTO entity2dto(VideoAlbum videoAlbum) {
         VideoAlbumDTO videoAlbumDTO = new VideoAlbumDTO();
-        BeanUtils.copyProperties(videoAlbum, videoAlbumDTO, "videoList");
-        List<Integer> videoList = ArrayConvertUtils.string2list(videoAlbum.getVideoList());
-        videoAlbumDTO.setVideoList(videoList);
+        BeanUtils.copyProperties(videoAlbum, videoAlbumDTO, "albumVideoList");
+        List<Integer> albumVideoList = ArrayConvertUtils.string2list(videoAlbum.getAlbumVideoList());
+        videoAlbumDTO.setAlbumVideoList(albumVideoList);
         return videoAlbumDTO;
     }
 
