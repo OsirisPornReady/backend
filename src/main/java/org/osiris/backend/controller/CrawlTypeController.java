@@ -1,5 +1,6 @@
 package org.osiris.backend.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.osiris.backend.dto.STResDTO;
 import org.osiris.backend.entity.Area;
@@ -51,7 +52,9 @@ public class CrawlTypeController {
 
     @GetMapping("/get_select_all")
     public List<CrawlType> getSelectAll() {
-        return crawlTypeService.list();
+        QueryWrapper<CrawlType> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByAsc("crawlTypeKey");
+        return crawlTypeService.list(queryWrapper);
     }
 
 }
