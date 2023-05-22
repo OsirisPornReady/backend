@@ -11,62 +11,65 @@ import lombok.Data;
 public class Comic {
     @TableId(type = IdType.AUTO)
     private Integer id;
+    @TableField("canCrawl")
+    private Boolean canCrawl;
+    @TableField("crawlApiUrl")
+    private String crawlApiUrl;
+    @TableField("crawlKey")
+    private String crawlKey;
     private String title;
-    @TableField("titleEng")
-    private String titleEng;
-//    @TableField("onStorage")
-//    private Boolean onStorage;
-//    @TableField("existSerialNumber")
-//    private Boolean existSerialNumber;
-//    @TableField("serialNumber")
-//    private String serialNumber;
-//    @TableField("videoType")
-//    private Integer videoType;
-//    @TableField("videoResolution")
-//    private Integer videoResolution;
-//    @TableField("publishTime")
-//    private String publishTime;
-//    private Integer duration;
-//    private String director;
-//    private String producer;
-//    private String releaser;
-//    private String brand;
-//    @TableField("inSeries")
-//    private Boolean inSeries;
-//    private String series;
-//    private String tags;
-//    private String stars;
-//    @TableField("tagsRaw")
-//    private String tagsRaw;
-//    @TableField("starsRaw")
-//    private String starsRaw;
-//    private String description;
-//    @TableField("onSubscription")
-//    private Boolean onSubscription;
-//    @TableField("canCrawl")
-//    private Boolean canCrawl;
-//    @TableField("crawlApiUrl")
-//    private String crawlApiUrl;
-//    @TableField("crawlKey")
-//    private String crawlKey;
-//    @TableField("addTime")
-//    private String addTime;
-//    @TableField("updateTime")
-//    private String updateTime;
-//    @TableField("videoSrc")
-//    private String videoSrc;
-//    private Integer score;
-//    @TableField("coverSrc")
-//    private String coverSrc;
-//    @TableField("previewImageSrcList")
-//    private String previewImageSrcList;
-//    @TableField("localCoverSrc")
-//    private String localCoverSrc;
-//    @TableField("localPreviewImageSrcList")
-//    private String localPreviewImageSrcList;
-//    @TableField("dataSourceUrl")
-//    private String dataSourceUrl;
-//    @TableField("btdigUrl")
-//    private String btdigUrl;
-//    private String comment;
+    @TableField("titleJap")
+    private String titleJap;
+    private Integer score;
+    @TableField("pageSize")
+    private Integer pageSize;
+    @TableField("languageTags")
+    private String languageTags;
+    @TableField("parodyTags")
+    private String parodyTags;
+    @TableField("characterTags")
+    private String characterTags;
+    @TableField("groupTags")
+    private String groupTags;
+    @TableField("artistTags")
+    private String artistTags;
+    @TableField("maleTags")
+    private String maleTags;
+    @TableField("femaleTags")
+    private String femaleTags;
+    @TableField("mixedTags")
+    private String mixedTags;
+    @TableField("otherTags")
+    private String otherTags;
+    @TableField("onStorage")
+    private Boolean onStorage;
+    @TableField("comicSrc")
+    private String comicSrc;
+    @TableField("comicResolution")
+    private Integer comicResolution;
+    @TableField("postedTime")
+    private String postedTime;
+    @TableField("comicType")
+    private Integer comicType;
+    @TableField("inSeries")
+    private Boolean inSeries;
+    private String series;
+    private String description;
+    @TableField("coverSrc")
+    private String coverSrc;
+    @TableField("previewImageSrcList")
+    private String previewImageSrcList;
+    @TableField("localCoverSrc")
+    private String localCoverSrc;
+    @TableField("localPreviewImageSrcList")
+    private String localPreviewImageSrcList;
+    @TableField("dataSourceUrl")
+    private String dataSourceUrl;
+    private String comment;
+    @TableField("addTime")
+    private String addTime;
+    @TableField("updateTime")
+    private String updateTime;
+    @TableField("secureFileName")
+    private String secureFileName;
 }

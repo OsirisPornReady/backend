@@ -2,11 +2,8 @@ package org.osiris.backend.controller;
 
 import org.osiris.backend.dto.ComicDTO;
 import org.osiris.backend.dto.STResDTO;
-import org.osiris.backend.dto.VideoDTO;
 import org.osiris.backend.entity.Comic;
-import org.osiris.backend.entity.Video;
 import org.osiris.backend.service.ComicService;
-import org.osiris.backend.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,14 +26,14 @@ public class ComicController {
     @PostMapping
     public void add(@RequestBody ComicDTO comicDTO) {
         Date now = new Date();
-//        videoDTO.setAddTime(now);
-//        videoDTO.setUpdateTime(now);
+        comicDTO.setAddTime(now);
+        comicDTO.setUpdateTime(now);
         comicService.addComic(comicDTO);
     }
 
     @PutMapping("/{id}")
     public void update(@PathVariable Integer id, @RequestBody ComicDTO comicDTO) {
-//        videoDTO.setUpdateTime(new Date());
+        comicDTO.setUpdateTime(new Date());
         comicService.updateComic(comicDTO, id);
     }
 
@@ -59,15 +56,22 @@ public class ComicController {
                 @RequestParam(value = "defaultSort", required = false) String defaultSort,
                 @RequestParam(value = "keyword", required = false) String keyword,
                 @RequestParam(value = "title", required = false) String title,
-                @RequestParam(value = "serialNumber", required = false) String serialNumber,
-                @RequestParam(value = "starsRaw", required = false) String starsRaw,
-                @RequestParam(value = "tagsRaw", required = false) String tagsRaw,
-                @RequestParam(value = "publishTimeStart", required = false) String publishTimeStart,
-                @RequestParam(value = "publishTimeEnd", required = false) String publishTimeEnd,
+                @RequestParam(value = "titleJap", required = false) String titleJap,
+                @RequestParam(value = "languageTags", required = false) String languageTags,
+                @RequestParam(value = "parodyTags", required = false) String parodyTags,
+                @RequestParam(value = "characterTags", required = false) String characterTags,
+                @RequestParam(value = "groupTags", required = false) String groupTags,
+                @RequestParam(value = "artistTags", required = false) String artistTags,
+                @RequestParam(value = "maleTags", required = false) String maleTags,
+                @RequestParam(value = "femaleTags", required = false) String femaleTags,
+                @RequestParam(value = "mixedTags", required = false) String mixedTags,
+                @RequestParam(value = "otherTags", required = false) String otherTags,
+                @RequestParam(value = "postedTimeStart", required = false) String postedTimeStart,
+                @RequestParam(value = "postedTimeEnd", required = false) String postedTimeEnd,
                 @RequestParam(value = "addTimeStart", required = false) String addTimeStart,
                 @RequestParam(value = "addTimeEnd", required = false) String addTimeEnd
                             ) {
-        return comicService.getByPage(pi, ps, sort, defaultSort, keyword, title, serialNumber, starsRaw, tagsRaw, publishTimeStart, publishTimeEnd, addTimeStart, addTimeEnd);
+        return comicService.getByPage(pi, ps, sort, defaultSort, keyword, title, titleJap, languageTags, parodyTags, characterTags, groupTags, artistTags, maleTags, femaleTags, mixedTags, otherTags, postedTimeStart, postedTimeEnd, addTimeStart, addTimeEnd);
     }
 
     @GetMapping("/get_select_all")
