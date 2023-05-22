@@ -89,9 +89,12 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     }
 
     @Override
-    public STResDTO getByPage(Integer pi, Integer ps, List<String> sort, String defaultSort, String title, String serialNumber, String starsRaw, String tagsRaw, String publishTimeStart, String publishTimeEnd, String addTimeStart, String addTimeEnd) {
+    public STResDTO getByPage(Integer pi, Integer ps, List<String> sort, String defaultSort, String keyword, String title, String serialNumber, String starsRaw, String tagsRaw, String publishTimeStart, String publishTimeEnd, String addTimeStart, String addTimeEnd) {
         Page<Video> page = new Page<>(pi, ps);
         QueryWrapper<Video> queryWrapper = new QueryWrapper<>();
+        if (sort == null && defaultSort == null) {
+            queryWrapper.orderByDesc("updateTime");
+        }
         if (sort != null) {
             sort.forEach(s -> {
                 List<String> params = StringManipUtils.splitSort(s);
@@ -114,36 +117,43 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 }
             }
         }
-        if (title != null) {
-            queryWrapper.like("title", title);
-        }
-        if (serialNumber != null) {
-            queryWrapper.like("serialNumber", serialNumber);
-        }
-        if (starsRaw != null) {
-            queryWrapper.like("starsRaw", starsRaw);
-        }
-        if (tagsRaw != null) {
-            queryWrapper.like("tagsRaw", tagsRaw);
-        }
-        if (publishTimeStart != null && publishTimeEnd != null) { //前端选择器就已经判断先后关系了,此处不必判断,只需判断相等
-            if (Objects.equals(publishTimeStart, publishTimeEnd)) {
-                queryWrapper.like("publishTime", publishTimeStart);
-            } else {
-                // 主动调用or表示紧接着下一个方法不是用and连接!(不调用or则默认为使用and连接)
-                // 也可以写成链式写法
-                queryWrapper.ge("publishTime", publishTimeStart);
-                queryWrapper.le("publishTime", publishTimeEnd);
+        if (keyword != null) {
+            queryWrapper.like("title", keyword).or()
+                        .like("serialNumber", keyword).or()
+                        .like("starsRaw", keyword).or()
+                        .like("tagsRaw", keyword);
+        } else { //并不需要精准匹配,也就不需要likeleft和likeright
+            if (title != null) {
+                queryWrapper.like("title", title);
             }
-        }
-        if (addTimeStart != null && addTimeEnd != null) { //前端选择器就已经判断先后关系了,此处不必判断,只需判断相等
-            if (Objects.equals(addTimeStart, addTimeEnd)) {
-                queryWrapper.like("addTime", addTimeStart);
-            } else {
-                // 主动调用or表示紧接着下一个方法不是用and连接!(不调用or则默认为使用and连接)
-                // 也可以写成链式写法
-                queryWrapper.ge("addTime", addTimeStart);
-                queryWrapper.le("addTime", addTimeEnd);
+            if (serialNumber != null) {
+                queryWrapper.like("serialNumber", serialNumber);
+            }
+            if (starsRaw != null) {
+                queryWrapper.like("starsRaw", starsRaw);
+            }
+            if (tagsRaw != null) {
+                queryWrapper.like("tagsRaw", tagsRaw);
+            }
+            if (publishTimeStart != null && publishTimeEnd != null) { //前端选择器就已经判断先后关系了,此处不必判断,只需判断相等
+                if (Objects.equals(publishTimeStart, publishTimeEnd)) {
+                    queryWrapper.like("publishTime", publishTimeStart);
+                } else {
+                    // 主动调用or表示紧接着下一个方法不是用and连接!(不调用or则默认为使用and连接)
+                    // 也可以写成链式写法
+                    queryWrapper.ge("publishTime", publishTimeStart);
+                    queryWrapper.le("publishTime", publishTimeEnd);
+                }
+            }
+            if (addTimeStart != null && addTimeEnd != null) { //前端选择器就已经判断先后关系了,此处不必判断,只需判断相等
+                if (Objects.equals(addTimeStart, addTimeEnd)) {
+                    queryWrapper.like("addTime", addTimeStart);
+                } else {
+                    // 主动调用or表示紧接着下一个方法不是用and连接!(不调用or则默认为使用and连接)
+                    // 也可以写成链式写法
+                    queryWrapper.ge("addTime", addTimeStart);
+                    queryWrapper.le("addTime", addTimeEnd);
+                }
             }
         }
         IPage<Video> ipage = this.page(page, queryWrapper);
