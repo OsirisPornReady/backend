@@ -121,7 +121,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             queryWrapper.like("title", keyword).or()
                         .like("serialNumber", keyword).or()
                         .like("starsRaw", keyword).or()
-                        .like("tagsRaw", keyword);
+                        .like("tagsRaw", keyword).or()
+                        .like("publishTime", keyword);
         } else { //并不需要精准匹配,也就不需要likeleft和likeright
             if (title != null) {
                 queryWrapper.like("title", title);
