@@ -72,4 +72,10 @@ public class Comic {
     private String updateTime;
     @TableField("secureFileName")
     private String secureFileName;
+    @TableField("comicPicLinkList")
+    private String comicPicLinkList;
+    @TableField("comicPicSrcList")
+    private String comicPicSrcList;
+    @TableField("localComicPicSrcList")
+    private String localComicPicSrcList;
 }

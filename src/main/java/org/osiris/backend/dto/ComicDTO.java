@@ -1,5 +1,6 @@
 package org.osiris.backend.dto;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.util.Date;
@@ -41,4 +42,7 @@ public class ComicDTO {
     private Date addTime;
     private Date updateTime;
     private String secureFileName;
+    private List<String> comicPicLinkList;
+    private List<String> comicPicSrcList;
+    private List<String> localComicPicSrcList;
 }
