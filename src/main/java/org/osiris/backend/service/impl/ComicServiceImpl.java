@@ -125,28 +125,32 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
     public STResDTO getByPage(Integer pi, Integer ps, List<String> sort, String defaultSort, String keyword, String title, String titleJap, String languageTags, String parodyTags, String characterTags, String groupTags, String artistTags, String maleTags, String femaleTags, String mixedTags, String otherTags, String postedTimeStart, String postedTimeEnd, String addTimeStart, String addTimeEnd) {
         Page<Comic> page = new Page<>(pi, ps);
         QueryWrapper<Comic> queryWrapper = new QueryWrapper<>();
+        if (Objects.equals(defaultSort, "null")){
+            defaultSort = null;
+        }
         if (sort == null && defaultSort == null) {
             queryWrapper.orderByDesc("updateTime");
-        }
-        if (sort != null) {
-            sort.forEach(s -> {
-                List<String> params = StringManipUtils.splitSort(s);
+        } else {
+            if (sort != null) {
+                sort.forEach(s -> {
+                    List<String> params = StringManipUtils.splitSort(s);
+                    if (params.size() == 2) {
+                        if (Objects.equals(params.get(1), "descend")) {
+                            queryWrapper.orderByDesc(params.get(0));
+                        } else if (Objects.equals(params.get(1), "ascend")) {
+                            queryWrapper.orderByAsc(params.get(0));
+                        }
+                    }
+                });
+            }
+            if (defaultSort != null) {
+                List<String> params = StringManipUtils.splitSort(defaultSort);
                 if (params.size() == 2) {
                     if (Objects.equals(params.get(1), "descend")) {
                         queryWrapper.orderByDesc(params.get(0));
                     } else if (Objects.equals(params.get(1), "ascend")) {
                         queryWrapper.orderByAsc(params.get(0));
                     }
-                }
-            });
-        }
-        if (defaultSort != null) {
-            List<String> params = StringManipUtils.splitSort(defaultSort);
-            if (params.size() == 2) {
-                if (Objects.equals(params.get(1), "descend")) {
-                    queryWrapper.orderByDesc(params.get(0));
-                } else if (Objects.equals(params.get(1), "ascend")) {
-                    queryWrapper.orderByAsc(params.get(0));
                 }
             }
         }

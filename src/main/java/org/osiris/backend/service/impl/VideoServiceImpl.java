@@ -92,28 +92,32 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     public STResDTO getByPage(Integer pi, Integer ps, List<String> sort, String defaultSort, String keyword, String title, String serialNumber, String starsRaw, String tagsRaw, String publishTimeStart, String publishTimeEnd, String addTimeStart, String addTimeEnd) {
         Page<Video> page = new Page<>(pi, ps);
         QueryWrapper<Video> queryWrapper = new QueryWrapper<>();
+        if (Objects.equals(defaultSort, "null")){
+            defaultSort = null;
+        }
         if (sort == null && defaultSort == null) {
             queryWrapper.orderByDesc("updateTime");
-        }
-        if (sort != null) {
-            sort.forEach(s -> {
-                List<String> params = StringManipUtils.splitSort(s);
+        } else {
+            if (sort != null) {
+                sort.forEach(s -> {
+                    List<String> params = StringManipUtils.splitSort(s);
+                    if (params.size() == 2) {
+                        if (Objects.equals(params.get(1), "descend")) {
+                            queryWrapper.orderByDesc(params.get(0));
+                        } else if (Objects.equals(params.get(1), "ascend")) {
+                            queryWrapper.orderByAsc(params.get(0));
+                        }
+                    }
+                });
+            }
+            if (defaultSort != null) {
+                List<String> params = StringManipUtils.splitSort(defaultSort);
                 if (params.size() == 2) {
                     if (Objects.equals(params.get(1), "descend")) {
                         queryWrapper.orderByDesc(params.get(0));
                     } else if (Objects.equals(params.get(1), "ascend")) {
                         queryWrapper.orderByAsc(params.get(0));
                     }
-                }
-            });
-        }
-        if (defaultSort != null) {
-            List<String> params = StringManipUtils.splitSort(defaultSort);
-            if (params.size() == 2) {
-                if (Objects.equals(params.get(1), "descend")) {
-                    queryWrapper.orderByDesc(params.get(0));
-                } else if (Objects.equals(params.get(1), "ascend")) {
-                    queryWrapper.orderByAsc(params.get(0));
                 }
             }
         }
