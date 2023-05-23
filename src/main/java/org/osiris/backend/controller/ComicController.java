@@ -83,12 +83,12 @@ public class ComicController {
 //    public Boolean isSerialNumberExist(@PathVariable String serialNumber) {
 //        return videoService.isSerialNumberExist(serialNumber);
 //    }
-//
-//    @PostMapping("/is_title_exist")
-//    public Boolean isTitleExist(@RequestBody String title) {
-//        return videoService.isTitleExist(title);
-//    }
-//
+
+    @PostMapping("/is_title_exist")
+    public Boolean isTitleExist(@RequestBody String title) {
+        return comicService.isTitleExist(title);
+    }
+
 //    @GetMapping("/switch_video_subscription/{id}")
 //    public void switchVideoSubscription(@PathVariable Integer id) {
 //        videoService.switchVideoSubscription(id);

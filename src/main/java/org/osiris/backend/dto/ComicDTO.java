@@ -45,4 +45,5 @@ public class ComicDTO {
     private List<String> comicPicLinkList;
     private List<String> comicPicSrcList;
     private List<String> localComicPicSrcList;
+    private Boolean existSeed;
 }

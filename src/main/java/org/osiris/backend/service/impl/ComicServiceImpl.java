@@ -250,17 +250,17 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
 //        List<Video> list = this.list(queryWrapper);
 //        return list.size() > 0;
 //    }
-//
-//    @Override
-//    public Boolean isTitleExist(String title) {
-//        QueryWrapper<Video> queryWrapper = new QueryWrapper<>();
-//        queryWrapper.lambda().like(Video::getTitle, title);
-//        queryWrapper.lambda().likeLeft(Video::getTitle, title);
-//        queryWrapper.lambda().likeRight(Video::getTitle, title);
-//        List<Video> list = this.list(queryWrapper);
-//        return list.size() > 0;
-//    }
-//
+
+    @Override
+    public Boolean isTitleExist(String title) {
+        QueryWrapper<Comic> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().like(Comic::getTitle, title);
+        queryWrapper.lambda().likeLeft(Comic::getTitle, title);
+        queryWrapper.lambda().likeRight(Comic::getTitle, title);
+        List<Comic> list = this.list(queryWrapper);
+        return list.size() > 0;
+    }
+
 //    @Override
 //    public void switchVideoSubscription(Integer id) {
 //        Video video = this.getById(id);

@@ -78,4 +78,6 @@ public class Comic {
     private String comicPicSrcList;
     @TableField("localComicPicSrcList")
     private String localComicPicSrcList;
+    @TableField("existSeed")
+    private Boolean existSeed;
 }
