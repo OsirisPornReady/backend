@@ -43,7 +43,11 @@ public class ComicDTO {
     private Date updateTime;
     private String secureFileName;
     private List<String> comicPicLinkList;
-    private List<String> comicPicSrcList;
+    private List<String> comicFailOrderList;
     private List<String> localComicPicSrcList;
     private Boolean existSeed;
+    private String comicPhysicalPath;
+    private String comicServerPath;
+    private String comicPhysicalDirectoryName;
+    private String comicServerDirectoryName;
 }

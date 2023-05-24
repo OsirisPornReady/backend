@@ -27,7 +27,7 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
     @Override
     public Comic dto2entity(ComicDTO comicDTO) {
         Comic comic = new Comic();
-        BeanUtils.copyProperties(comicDTO, comic, "language", "parody", "character", "group", "artist", "male", "female", "mixed", "other", "postedTime", "previewImageSrcList", "localPreviewImageSrcList", "addTime", "updateTime", "comicPicLinkList", "comicPicSrcList", "localComicPicSrcList");
+        BeanUtils.copyProperties(comicDTO, comic, "language", "parody", "character", "group", "artist", "male", "female", "mixed", "other", "postedTime", "previewImageSrcList", "localPreviewImageSrcList", "addTime", "updateTime", "comicPicLinkList", "comicFailOrderList", "localComicPicSrcList");
 
         String languageTags = ArrayConvertUtils.liststring2string(comicDTO.getLanguageTags());
         String parodyTags = ArrayConvertUtils.liststring2string(comicDTO.getParodyTags());
@@ -44,7 +44,7 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
         String previewImageSrcList = ArrayConvertUtils.liststring2string(comicDTO.getPreviewImageSrcList());
         String localPreviewImageSrcList = ArrayConvertUtils.liststring2string(comicDTO.getLocalPreviewImageSrcList());
         String comicPicLinkList = ArrayConvertUtils.liststring2string(comicDTO.getComicPicLinkList());
-        String comicPicSrcList = ArrayConvertUtils.liststring2string(comicDTO.getComicPicSrcList());
+        String comicFailOrderList = ArrayConvertUtils.liststring2string(comicDTO.getComicFailOrderList());
         String localComicPicSrcList = ArrayConvertUtils.liststring2string(comicDTO.getLocalComicPicSrcList());
         String postedTime = DateConvertUtils.date2string(comicDTO.getPostedTime());
         String addTime = DateConvertUtils.date2string(comicDTO.getAddTime());
@@ -64,7 +64,7 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
         comic.setPreviewImageSrcList(previewImageSrcList);
         comic.setLocalPreviewImageSrcList(localPreviewImageSrcList);
         comic.setComicPicLinkList(comicPicLinkList);
-        comic.setComicPicSrcList(comicPicSrcList);
+        comic.setComicFailOrderList(comicFailOrderList);
         comic.setLocalComicPicSrcList(localComicPicSrcList);
         comic.setPostedTime(postedTime);
         comic.setAddTime(addTime);
@@ -76,7 +76,7 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
     @Override
     public ComicDTO entity2dto(Comic comic) {
         ComicDTO comicDTO = new ComicDTO();
-        BeanUtils.copyProperties(comic, comicDTO, "language", "parody", "character", "group", "artist", "male", "female", "mixed", "other", "postedTime", "previewImageSrcList", "localPreviewImageSrcList", "addTime", "updateTime", "comicPicLinkList", "comicPicSrcList", "localComicPicSrcList");
+        BeanUtils.copyProperties(comic, comicDTO, "language", "parody", "character", "group", "artist", "male", "female", "mixed", "other", "postedTime", "previewImageSrcList", "localPreviewImageSrcList", "addTime", "updateTime", "comicPicLinkList", "comicFailOrderList", "localComicPicSrcList");
 
         List<String> languageTags = ArrayConvertUtils.string2stringlist(comic.getLanguageTags());
         List<String> parodyTags = ArrayConvertUtils.string2stringlist(comic.getParodyTags());
@@ -92,7 +92,7 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
         List<String> previewImageSrcList = ArrayConvertUtils.string2stringlist(comic.getPreviewImageSrcList());
         List<String> localPreviewImageSrcList = ArrayConvertUtils.string2stringlist(comic.getLocalPreviewImageSrcList());
         List<String> comicPicLinkList = ArrayConvertUtils.string2stringlist(comic.getComicPicLinkList());
-        List<String> comicPicSrcList = ArrayConvertUtils.string2stringlist(comic.getComicPicSrcList());
+        List<String> comicFailOrderList = ArrayConvertUtils.string2stringlist(comic.getComicFailOrderList());
         List<String> localComicPicSrcList = ArrayConvertUtils.string2stringlist(comic.getLocalComicPicSrcList());
         Date postedTime = DateConvertUtils.string2date(comic.getPostedTime());
         Date addTime = DateConvertUtils.string2date(comic.getAddTime());
@@ -112,7 +112,7 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
         comicDTO.setPreviewImageSrcList(previewImageSrcList);
         comicDTO.setLocalPreviewImageSrcList(localPreviewImageSrcList);
         comicDTO.setComicPicLinkList(comicPicLinkList);
-        comicDTO.setComicPicSrcList(comicPicSrcList);
+        comicDTO.setComicFailOrderList(comicFailOrderList);
         comicDTO.setLocalComicPicSrcList(localComicPicSrcList);
         comicDTO.setPostedTime(postedTime);
         comicDTO.setAddTime(addTime);

@@ -70,4 +70,12 @@ public class Video {
     @TableField("btdigUrl")
     private String btdigUrl;
     private String comment;
+    @TableField("imagePhysicalPath")
+    private String imagePhysicalPath;
+    @TableField("imageServerPath")
+    private String imageServerPath;
+    @TableField("imagePhysicalDirectoryName")
+    private String imagePhysicalDirectoryName;
+    @TableField("imageServerDirectoryName")
+    private String imageServerDirectoryName;
 }

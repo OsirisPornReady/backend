@@ -74,10 +74,18 @@ public class Comic {
     private String secureFileName;
     @TableField("comicPicLinkList")
     private String comicPicLinkList;
-    @TableField("comicPicSrcList")
-    private String comicPicSrcList;
+    @TableField("comicFailOrderList")
+    private String comicFailOrderList;
     @TableField("localComicPicSrcList")
     private String localComicPicSrcList;
     @TableField("existSeed")
     private Boolean existSeed;
+    @TableField("comicPhysicalPath")
+    private String comicPhysicalPath;
+    @TableField("comicServerPath")
+    private String comicServerPath;
+    @TableField("comicPhysicalDirectoryName")
+    private String comicPhysicalDirectoryName;
+    @TableField("comicServerDirectoryName")
+    private String comicServerDirectoryName;
 }

@@ -1,5 +1,6 @@
 package org.osiris.backend.dto;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.util.Date;
@@ -42,4 +43,8 @@ public class VideoDTO {
     private String dataSourceUrl;
     private String btdigUrl;
     private String comment;
+    private String imagePhysicalPath;
+    private String imageServerPath;
+    private String imagePhysicalDirectoryName;
+    private String imageServerDirectoryName;
 }
