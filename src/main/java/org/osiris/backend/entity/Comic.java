@@ -88,4 +88,6 @@ public class Comic {
     private String comicPhysicalDirectoryName;
     @TableField("comicServerDirectoryName")
     private String comicServerDirectoryName;
+    @TableField("onlyCrawlInfo")
+    private Boolean onlyCrawlInfo;
 }
