@@ -31,7 +31,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     public Video dto2entity(VideoDTO videoDTO) {
         Video video = new Video();
 
-        BeanUtils.copyProperties(videoDTO, video, "publishTime", "series", "tags", "stars", "tagsRaw", "starsRaw", "addTime", "updateTime", "videoSrc", "previewImageSrcList", "localPreviewImageSrcList");
+        BeanUtils.copyProperties(videoDTO, video, "publishTime", "series", "tags", "stars", "tagsRaw", "starsRaw", "addTime", "updateTime", "videoSrc", "previewImageSrcList", "localPreviewImageSrcList", "previewImageBase64List");
 
         String tags = ArrayConvertUtils.list2string(videoDTO.getTags());
         String stars = ArrayConvertUtils.list2string(videoDTO.getStars());
@@ -41,6 +41,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         String videoSrc = ArrayConvertUtils.liststring2string(videoDTO.getVideoSrc());
         String previewImageSrcList = ArrayConvertUtils.liststring2string(videoDTO.getPreviewImageSrcList());
         String localPreviewImageSrcList = ArrayConvertUtils.liststring2string(videoDTO.getLocalPreviewImageSrcList());
+        String previewImageBase64List = ArrayConvertUtils.liststring2string(videoDTO.getPreviewImageBase64List());
         String publishTime = DateConvertUtils.date2string(videoDTO.getPublishTime());
         String addTime = DateConvertUtils.date2string(videoDTO.getAddTime());
         String updateTime = DateConvertUtils.date2string(videoDTO.getUpdateTime());
@@ -53,6 +54,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         video.setVideoSrc(videoSrc);
         video.setPreviewImageSrcList(previewImageSrcList);
         video.setLocalPreviewImageSrcList(localPreviewImageSrcList);
+        video.setPreviewImageBase64List(previewImageBase64List);
         video.setPublishTime(publishTime);
         video.setAddTime(addTime);
         video.setUpdateTime(updateTime);
@@ -62,7 +64,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     @Override
     public VideoDTO entity2dto(Video video) {
         VideoDTO videoDTO = new VideoDTO();
-        BeanUtils.copyProperties(video, videoDTO, "publishTime", "series", "tags", "stars", "tagsRaw", "starsRaw", "addTime", "updateTime", "videoSrc", "previewImageSrcList", "localPreviewImageSrcList");
+        BeanUtils.copyProperties(video, videoDTO, "publishTime", "series", "tags", "stars", "tagsRaw", "starsRaw", "addTime", "updateTime", "videoSrc", "previewImageSrcList", "localPreviewImageSrcList", "previewImageBase64List");
         List<Integer> tags = ArrayConvertUtils.string2list(video.getTags());
         List<Integer> stars = ArrayConvertUtils.string2list(video.getStars());
         List<String> tagsRaw = ArrayConvertUtils.string2stringlist(video.getTagsRaw());
@@ -71,6 +73,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         List<String> videoSrc = ArrayConvertUtils.string2stringlist(video.getVideoSrc());
         List<String> previewImageSrcList = ArrayConvertUtils.string2stringlist(video.getPreviewImageSrcList());
         List<String> localPreviewImageSrcList = ArrayConvertUtils.string2stringlist(video.getLocalPreviewImageSrcList());
+        List<String> previewImageBase64List = ArrayConvertUtils.string2stringlist(video.getPreviewImageBase64List());
         Date publishTime = DateConvertUtils.string2date(video.getPublishTime());
         Date addTime = DateConvertUtils.string2date(video.getAddTime());
         Date updateTime = DateConvertUtils.string2date(video.getUpdateTime());
@@ -82,6 +85,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         videoDTO.setVideoSrc(videoSrc);
         videoDTO.setPreviewImageSrcList(previewImageSrcList);
         videoDTO.setLocalPreviewImageSrcList(localPreviewImageSrcList);
+        videoDTO.setPreviewImageBase64List(previewImageBase64List);
         videoDTO.setPublishTime(publishTime);
         videoDTO.setAddTime(addTime);
         videoDTO.setUpdateTime(updateTime);

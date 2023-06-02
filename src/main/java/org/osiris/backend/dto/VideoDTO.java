@@ -47,4 +47,6 @@ public class VideoDTO {
     private String imageServerPath;
     private String imagePhysicalDirectoryName;
     private String imageServerDirectoryName;
+    private String coverBase64;
+    private List<String> previewImageBase64List;
 }

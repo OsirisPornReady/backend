@@ -78,4 +78,8 @@ public class Video {
     private String imagePhysicalDirectoryName;
     @TableField("imageServerDirectoryName")
     private String imageServerDirectoryName;
+    @TableField("coverBase64")
+    private String coverBase64;
+    @TableField("previewImageBase64List")
+    private String previewImageBase64List;
 }
