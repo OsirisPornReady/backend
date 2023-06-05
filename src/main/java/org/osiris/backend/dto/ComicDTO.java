@@ -51,4 +51,5 @@ public class ComicDTO {
     private String comicPhysicalDirectoryName;
     private String comicServerDirectoryName;
     private Boolean onlyCrawlInfo;
+    private String coverBase64;
 }

@@ -90,4 +90,6 @@ public class Comic {
     private String comicServerDirectoryName;
     @TableField("onlyCrawlInfo")
     private Boolean onlyCrawlInfo;
+    @TableField("coverBase64")
+    private String coverBase64;
 }
