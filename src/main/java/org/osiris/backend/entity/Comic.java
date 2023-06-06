@@ -92,4 +92,6 @@ public class Comic {
     private Boolean onlyCrawlInfo;
     @TableField("coverBase64")
     private String coverBase64;
+    @TableField("integrity")
+    private Boolean integrity;
 }

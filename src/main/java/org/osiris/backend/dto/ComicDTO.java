@@ -52,4 +52,5 @@ public class ComicDTO {
     private String comicServerDirectoryName;
     private Boolean onlyCrawlInfo;
     private String coverBase64;
+    private Boolean integrity;
 }
