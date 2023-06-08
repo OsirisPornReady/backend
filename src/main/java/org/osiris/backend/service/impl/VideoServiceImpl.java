@@ -174,15 +174,26 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     }
 
     @Override
-    public void addVideo(VideoDTO videoDTO) {
-        this.save(this.dto2entity(videoDTO));
+    public Integer addVideo(VideoDTO videoDTO) {
+        Video video = this.dto2entity(videoDTO);
+        boolean result = this.save(video);
+        if (result) {
+            return video.getId();
+        } else {
+            return -1;
+        }
     }
 
     @Override
-    public void updateVideo(VideoDTO videoDTO, Integer id) {
+    public Integer updateVideo(VideoDTO videoDTO, Integer id) {
         UpdateWrapper<Video> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("id", id);
-        this.update(this.dto2entity(videoDTO), updateWrapper);
+        boolean result = this.update(this.dto2entity(videoDTO), updateWrapper);
+        if (result) {
+            return id;
+        } else {
+            return -1;
+        }
     }
 
     @Override

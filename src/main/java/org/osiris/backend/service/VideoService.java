@@ -12,8 +12,8 @@ public interface VideoService extends IService<Video> {
     public Video dto2entity(VideoDTO videoDTO);
     public VideoDTO entity2dto(Video video);
     public STResDTO getByPage(Integer pi, Integer ps, List<String> sort, String defaultSort, String keyword, String title, String serialNumber, String starsRaw, String tagsRaw, String publishTimeStart, String publishTimeEnd, String addTimeStart, String addTimeEnd);
-    public void addVideo(VideoDTO videoDTO);
-    public void updateVideo(VideoDTO videoDTO, Integer id);
+    public Integer addVideo(VideoDTO videoDTO);
+    public Integer updateVideo(VideoDTO videoDTO, Integer id);
     public VideoDTO getDTOById(Integer id);
     public Boolean isSerialNumberExist(String serialNumber);
     public Boolean isTitleExist(String title);

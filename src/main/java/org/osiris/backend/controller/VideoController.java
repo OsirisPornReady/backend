@@ -25,17 +25,17 @@ public class VideoController {
     }
 
     @PostMapping
-    public void add(@RequestBody VideoDTO videoDTO) {
+    public Integer add(@RequestBody VideoDTO videoDTO) {
         Date now = new Date();
         videoDTO.setAddTime(now);
         videoDTO.setUpdateTime(now);
-        videoService.addVideo(videoDTO);
+        return videoService.addVideo(videoDTO);
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable Integer id, @RequestBody VideoDTO videoDTO) {
+    public Integer update(@PathVariable Integer id, @RequestBody VideoDTO videoDTO) {
         videoDTO.setUpdateTime(new Date());
-        videoService.updateVideo(videoDTO, id);
+        return videoService.updateVideo(videoDTO, id);
     }
 
     @DeleteMapping("/{id}")
