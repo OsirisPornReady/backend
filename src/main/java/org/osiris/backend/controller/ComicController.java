@@ -6,6 +6,7 @@ import org.osiris.backend.entity.Comic;
 import org.osiris.backend.service.ComicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
@@ -93,4 +94,10 @@ public class ComicController {
 //    public void switchVideoSubscription(@PathVariable Integer id) {
 //        videoService.switchVideoSubscription(id);
 //    }
+
+
+    @PostMapping("/upload_local_comic")
+    public Boolean uploadLocalComic(@RequestPart MultipartFile file) {
+        return true;
+    }
 }
