@@ -1,9 +1,11 @@
 package org.osiris.backend.controller;
 
 import org.osiris.backend.dto.ComicDTO;
+import org.osiris.backend.dto.LocalComicDTO;
 import org.osiris.backend.dto.STResDTO;
 import org.osiris.backend.entity.Comic;
 import org.osiris.backend.service.ComicService;
+import org.osiris.backend.service.LocalComicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,10 +20,12 @@ import java.util.List;
 public class ComicController {
 
     private final ComicService comicService;
+    private final LocalComicService localComicService;
 
     @Autowired
-    public ComicController(ComicService comicService) {
+    public ComicController(ComicService comicService, LocalComicService localComicService) {
         this.comicService = comicService;
+        this.localComicService = localComicService;
     }
 
     @PostMapping
@@ -100,4 +104,23 @@ public class ComicController {
     public Boolean uploadLocalComic(@RequestPart MultipartFile file) {
         return true;
     }
+
+    @PostMapping("/add_local_comic")
+    public void addLocalComic(@RequestBody LocalComicDTO localComicDTO) {
+        Date now = new Date();
+        localComicDTO.setAddTime(now);
+        localComicService.addLocalComic(localComicDTO);
+    }
+
+    @PutMapping("update_local_comic/{id}")
+    public void updateLocalComic(@PathVariable Integer id, @RequestBody LocalComicDTO localComicDTO) { localComicService.updateLocalComic(localComicDTO, id); }
+
+    @DeleteMapping("delete_local_comic/{id}")
+    public void deleteLocalComic(@PathVariable Integer id) { localComicService.removeById(id); }
+
+    @GetMapping("get_local_comic_by_id/{id}")
+    public LocalComicDTO getLocalComicById(@PathVariable Integer id) { return localComicService.getDTOById(id); }
+
+    @GetMapping("get_local_comic_list_by_comic_id/{comicId}")
+    public List<LocalComicDTO> getLocalComicListByComicId(@PathVariable Integer comicId) { return localComicService.getListByComicId(comicId); }
 }
