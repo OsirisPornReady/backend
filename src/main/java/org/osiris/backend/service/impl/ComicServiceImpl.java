@@ -129,7 +129,7 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
             defaultSort = null;
         }
         if (sort == null && defaultSort == null) {
-            queryWrapper.orderByDesc("updateTime");
+            queryWrapper.orderByDesc("addTime");
         } else {
             if (sort != null) {
                 sort.forEach(s -> {
@@ -247,14 +247,6 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
         return entity2dto(this.getById(id));
     }
 
-//    @Override
-//    public Boolean isSerialNumberExist(String serialNumber) {
-//        QueryWrapper<Video> queryWrapper = new QueryWrapper<>();
-//        queryWrapper.lambda().eq(Video::getSerialNumber, serialNumber);
-//        List<Video> list = this.list(queryWrapper);
-//        return list.size() > 0;
-//    }
-
     @Override
     public Boolean isTitleExist(String title) {
         QueryWrapper<Comic> queryWrapper = new QueryWrapper<>();
@@ -264,22 +256,4 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
         List<Comic> list = this.list(queryWrapper);
         return list.size() > 0;
     }
-
-//    @Override
-//    public void switchVideoSubscription(Integer id) {
-//        Video video = this.getById(id);
-//        if (video != null) {
-//            Boolean onSubscription = video.getOnSubscription();
-//            Boolean newValue;
-//            if (onSubscription == null || onSubscription == false) {
-//                newValue = false;
-//            } else {
-//                newValue = true;
-//            }
-//            UpdateWrapper<Video> updateWrapper = new UpdateWrapper<>();
-//            updateWrapper.eq("id", id)
-//                    .set("onSubscription", newValue);
-//            this.update(updateWrapper);
-//        }
-//    }
 }

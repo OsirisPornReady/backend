@@ -123,4 +123,9 @@ public class ComicController {
 
     @GetMapping("get_local_comic_list_by_comic_id/{comicId}")
     public List<LocalComicDTO> getLocalComicListByComicId(@PathVariable Integer comicId) { return localComicService.getListByComicId(comicId); }
+
+    @GetMapping("get_comic_id_list_own_local")
+    public List<Integer> getComicIdListOwnLocal() {
+        return this.localComicService.getComicIdListOwnLocal();
+    }
 }

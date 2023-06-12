@@ -100,7 +100,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             defaultSort = null;
         }
         if (sort == null && defaultSort == null) {
-            queryWrapper.orderByDesc("updateTime");
+            queryWrapper.orderByDesc("addTime");
         } else {
             if (sort != null) {
                 sort.forEach(s -> {

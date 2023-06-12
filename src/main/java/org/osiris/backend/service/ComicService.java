@@ -18,5 +18,5 @@ public interface ComicService extends IService<Comic> {
     public ComicDTO getDTOById(Integer id);
 //    public Boolean isSerialNumberExist(String serialNumber);
     public Boolean isTitleExist(String title);
-//    public void switchVideoSubscription(Integer id);
+
 }

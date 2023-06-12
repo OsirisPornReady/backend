@@ -15,4 +15,5 @@ public interface LocalComicService extends IService<LocalComic> {
     public void addLocalComic(LocalComicDTO localComicDTO);
     public void updateLocalComic(LocalComicDTO localComicDTO, Integer id);
     public LocalComicDTO getDTOById(Integer id);
+    public List<Integer> getComicIdListOwnLocal();
 }

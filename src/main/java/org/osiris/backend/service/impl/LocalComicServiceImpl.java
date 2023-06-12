@@ -20,6 +20,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -79,6 +80,20 @@ public class LocalComicServiceImpl extends ServiceImpl<LocalComicMapper, LocalCo
     @Override
     public LocalComicDTO getDTOById(Integer id) {
         return entity2dto(this.getById(id));
+    }
+
+    @Override
+    public List<Integer> getComicIdListOwnLocal() {
+        QueryWrapper<LocalComic> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("id", "comicId");
+        List<LocalComic> list = this.list(queryWrapper);
+        List<Integer> comicIdList = list.stream().map(LocalComic::getComicId).distinct().toList();
+
+//        HashMap<Integer, Boolean> hashMap = new HashMap<>();
+//        list.forEach(item -> {
+//
+//        });
+        return comicIdList;
     }
 
 }
