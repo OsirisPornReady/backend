@@ -53,4 +53,5 @@ public class ComicDTO {
     private Boolean onlyCrawlInfo;
     private String coverBase64;
     private Boolean integrity;
+    private String chineseTitle;
 }

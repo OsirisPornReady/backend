@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
+import com.github.houbb.opencc4j.util.ZhConverterUtil;
+
 import org.osiris.backend.utils.StringManipUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -126,23 +128,33 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             }
         }
         if (keyword != null) {
+            String traditionalCHNKeyword = ZhConverterUtil.toTraditional(keyword);
             queryWrapper.like("title", keyword).or()
+                        .like("title", traditionalCHNKeyword).or()
                         .like("serialNumber", keyword).or()
                         .like("starsRaw", keyword).or()
+                        .like("starsRaw", traditionalCHNKeyword).or()
                         .like("tagsRaw", keyword).or()
+                        .like("tagsRaw", traditionalCHNKeyword).or()
                         .like("publishTime", keyword);
         } else { //并不需要精准匹配,也就不需要likeleft和likeright
             if (title != null) {
-                queryWrapper.like("title", title);
+                String traditionalCHNTitle = ZhConverterUtil.toTraditional(title);
+                queryWrapper.like("title", title).or()
+                            .like("title", traditionalCHNTitle);
             }
             if (serialNumber != null) {
                 queryWrapper.like("serialNumber", serialNumber);
             }
             if (starsRaw != null) {
-                queryWrapper.like("starsRaw", starsRaw);
+                String traditionalCHNStarsRaw = ZhConverterUtil.toTraditional(starsRaw);
+                queryWrapper.like("starsRaw", starsRaw).or()
+                            .like("starsRaw", traditionalCHNStarsRaw);
             }
             if (tagsRaw != null) {
-                queryWrapper.like("tagsRaw", tagsRaw);
+                String traditionalCHNTagsRaw = ZhConverterUtil.toTraditional(tagsRaw);
+                queryWrapper.like("tagsRaw", tagsRaw).or()
+                            .like("tagsRaw", traditionalCHNTagsRaw);
             }
             if (publishTimeStart != null && publishTimeEnd != null) { //前端选择器就已经判断先后关系了,此处不必判断,只需判断相等
                 if (Objects.equals(publishTimeStart, publishTimeEnd)) {

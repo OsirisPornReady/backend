@@ -7,12 +7,12 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("VideoAlbum")
-public class VideoAlbum {
+@TableName("ComicAlbum")
+public class ComicAlbum {
     @TableId(type = IdType.AUTO)
     private Integer id;
     @TableField("albumName")
     private String albumName;
-    @TableField("albumVideoIdList")
-    private String albumVideoIdList;
+    @TableField("albumComicIdList")
+    private String albumComicIdList;
 }

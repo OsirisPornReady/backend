@@ -94,4 +94,6 @@ public class Comic {
     private String coverBase64;
     @TableField("integrity")
     private Boolean integrity;
+    @TableField("chineseTitle")
+    private String chineseTitle;
 }

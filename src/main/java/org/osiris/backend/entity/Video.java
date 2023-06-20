@@ -82,4 +82,6 @@ public class Video {
     private String coverBase64;
     @TableField("previewImageBase64List")
     private String previewImageBase64List;
+    @TableField("chineseTitle")
+    private String chineseTitle;
 }

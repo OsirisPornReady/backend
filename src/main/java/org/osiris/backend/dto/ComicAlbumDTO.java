@@ -5,8 +5,8 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class VideoAlbumDTO {
+public class ComicAlbumDTO {
     private Integer id;
     private String albumName;
-    private List<Integer> albumVideoIdList;
+    private List<Integer> albumComicIdList;
 }
