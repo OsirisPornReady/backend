@@ -140,21 +140,21 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         } else { //并不需要精准匹配,也就不需要likeleft和likeright
             if (title != null) {
                 String traditionalCHNTitle = ZhConverterUtil.toTraditional(title);
-                queryWrapper.like("title", title).or()
-                            .like("title", traditionalCHNTitle);
+                queryWrapper.and(wrapper -> wrapper.like("title", title).or()
+                                                   .like("title", traditionalCHNTitle));
             }
             if (serialNumber != null) {
                 queryWrapper.like("serialNumber", serialNumber);
             }
             if (starsRaw != null) {
                 String traditionalCHNStarsRaw = ZhConverterUtil.toTraditional(starsRaw);
-                queryWrapper.like("starsRaw", starsRaw).or()
-                            .like("starsRaw", traditionalCHNStarsRaw);
+                queryWrapper.and(wrapper -> wrapper.like("starsRaw", starsRaw).or()
+                                                   .like("starsRaw", traditionalCHNStarsRaw));
             }
             if (tagsRaw != null) {
                 String traditionalCHNTagsRaw = ZhConverterUtil.toTraditional(tagsRaw);
-                queryWrapper.like("tagsRaw", tagsRaw).or()
-                            .like("tagsRaw", traditionalCHNTagsRaw);
+                queryWrapper.and(wrapper -> wrapper.like("tagsRaw", tagsRaw).or()
+                                                   .like("tagsRaw", traditionalCHNTagsRaw));
             }
             if (publishTimeStart != null && publishTimeEnd != null) { //前端选择器就已经判断先后关系了,此处不必判断,只需判断相等
                 if (Objects.equals(publishTimeStart, publishTimeEnd)) {
