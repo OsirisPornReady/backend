@@ -63,9 +63,10 @@ public class VideoController {
                 @RequestParam(value = "publishTimeStart", required = false) String publishTimeStart,
                 @RequestParam(value = "publishTimeEnd", required = false) String publishTimeEnd,
                 @RequestParam(value = "addTimeStart", required = false) String addTimeStart,
-                @RequestParam(value = "addTimeEnd", required = false) String addTimeEnd
+                @RequestParam(value = "addTimeEnd", required = false) String addTimeEnd,
+                @RequestParam(value = "compoundKeyword", required = false) List<String> compoundKeyword
                             ) {
-        return videoService.getByPage(pi, ps, sort, defaultSort, keyword, title, serialNumber, starsRaw, tagsRaw, publishTimeStart, publishTimeEnd, addTimeStart, addTimeEnd);
+        return videoService.getByPage(pi, ps, sort, defaultSort, keyword, title, serialNumber, starsRaw, tagsRaw, publishTimeStart, publishTimeEnd, addTimeStart, addTimeEnd, compoundKeyword);
     }
 
     @GetMapping("/get_select_all")

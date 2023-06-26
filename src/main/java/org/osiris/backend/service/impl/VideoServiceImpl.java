@@ -95,7 +95,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     }
 
     @Override
-    public STResDTO getByPage(Integer pi, Integer ps, List<String> sort, String defaultSort, String keyword, String title, String serialNumber, String starsRaw, String tagsRaw, String publishTimeStart, String publishTimeEnd, String addTimeStart, String addTimeEnd) {
+    public STResDTO getByPage(Integer pi, Integer ps, List<String> sort, String defaultSort, String keyword, String title, String serialNumber, String starsRaw, String tagsRaw, String publishTimeStart, String publishTimeEnd, String addTimeStart, String addTimeEnd, List<String> compoundKeyword) {
         Page<Video> page = new Page<>(pi, ps);
         QueryWrapper<Video> queryWrapper = new QueryWrapper<>();
         if (Objects.equals(defaultSort, "null")){
@@ -137,6 +137,18 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                         .like("tagsRaw", keyword).or()
                         .like("tagsRaw", traditionalCHNKeyword).or()
                         .like("publishTime", keyword);
+        } else if (compoundKeyword != null) {
+            for (String ck : compoundKeyword) {
+                String traditionalCHNCK = ZhConverterUtil.toTraditional(ck);
+                queryWrapper.and(wrapper -> wrapper.like("title", ck).or()
+                                                   .like("title", traditionalCHNCK).or()
+                                                   .like("serialNumber", ck).or()
+                                                   .like("starsRaw", ck).or()
+                                                   .like("starsRaw", traditionalCHNCK).or()
+                                                   .like("tagsRaw", ck).or()
+                                                   .like("tagsRaw", traditionalCHNCK).or()
+                                                   .like("publishTime", ck));
+            }
         } else { //并不需要精准匹配,也就不需要likeleft和likeright
             if (title != null) {
                 String traditionalCHNTitle = ZhConverterUtil.toTraditional(title);
