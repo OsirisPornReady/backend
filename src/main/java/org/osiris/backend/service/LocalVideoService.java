@@ -15,4 +15,5 @@ public interface LocalVideoService extends IService<LocalVideo> {
     public void updateLocalVideo(LocalVideoDTO localVideoDTO, Integer id);
     public LocalVideoDTO getDTOById(Integer id);
     public List<Integer> getVideoIdListOwnLocal();
+    public Boolean isVideoIdOwnLocalVideo(Integer videoId);
 }

@@ -118,4 +118,12 @@ public class VideoController {
     public List<Integer> getVideoIdListOwnLocal() {
         return this.localVideoService.getVideoIdListOwnLocal();
     }
+
+    @GetMapping("check_video_onStorage_status/{videoId}")
+    public void checkVideoOnStorageStatus(@PathVariable Integer videoId) {
+        Boolean videoIdOwnLocalVideoStatus = localVideoService.isVideoIdOwnLocalVideo(videoId);
+        VideoDTO videoDTO = new VideoDTO();
+        videoDTO.setOnStorage(videoIdOwnLocalVideoStatus);
+        videoService.updateVideo(videoDTO, videoId);
+    }
 }

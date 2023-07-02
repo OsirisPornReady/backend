@@ -80,4 +80,13 @@ public class LocalVideoServiceImpl extends ServiceImpl<LocalVideoMapper, LocalVi
         return list.stream().map(LocalVideo::getVideoId).distinct().toList();
     }
 
+    @Override
+    public Boolean isVideoIdOwnLocalVideo(Integer videoId) {
+        QueryWrapper<LocalVideo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("id", "videoId");
+        queryWrapper.eq("videoId", videoId);
+        List<LocalVideo> list = this.list(queryWrapper);
+        return list.size() > 0;
+    }
+
 }
