@@ -11,6 +11,7 @@ import org.osiris.backend.entity.LocalVideo;
 
 import org.osiris.backend.service.VideoService;
 import org.osiris.backend.service.LocalVideoService;
+import org.osiris.backend.service.VideoOnClientService;
 
 import java.util.Date;
 import java.util.List;
@@ -23,11 +24,13 @@ public class VideoController {
 
     private final VideoService videoService;
     private final LocalVideoService localVideoService;
+    private final VideoOnClientService videoOnClientService;
 
     @Autowired
-    public VideoController(VideoService videoService, LocalVideoService localVideoService) {
+    public VideoController(VideoService videoService, LocalVideoService localVideoService, VideoOnClientService videoOnClientService) {
         this.videoService = videoService;
         this.localVideoService = localVideoService;
+        this.videoOnClientService = videoOnClientService;
     }
 
     @PostMapping
@@ -125,5 +128,21 @@ public class VideoController {
         VideoDTO videoDTO = new VideoDTO();
         videoDTO.setOnStorage(videoIdOwnLocalVideoStatus);
         videoService.updateVideo(videoDTO, videoId);
+    }
+
+
+    @GetMapping("get_video_id_list_on_client")
+    public List<Integer> getVideoIdListOnClient() {
+        return videoOnClientService.getVideoIdList();
+    }
+
+    @GetMapping("push_video_on_client/{videoId}")
+    public void pushVideoOnClient(@PathVariable Integer videoId) {
+        videoOnClientService.pushVideoOnClient(videoId);
+    }
+
+    @GetMapping("pull_video_off_client/{videoId}")
+    public void pullVideoOffClient(@PathVariable Integer videoId) {
+        videoOnClientService.pullVideoOffClient(videoId);
     }
 }
