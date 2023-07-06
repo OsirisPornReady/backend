@@ -118,6 +118,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                               Integer onClient) {
         Page<Video> page = new Page<>(pi, ps);
         QueryWrapper<Video> queryWrapper = new QueryWrapper<>();
+
+        // 排序相关
         if (Objects.equals(defaultSort, "null")){
             defaultSort = null;
         }
@@ -147,16 +149,19 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 }
             }
         }
+
+        // 搜索相关
         if (keyword != null) {
             String traditionalCHNKeyword = ZhConverterUtil.toTraditional(keyword);
-            queryWrapper.like("title", keyword).or()
-                        .like("title", traditionalCHNKeyword).or()
-                        .like("serialNumber", keyword).or()
-                        .like("starsRaw", keyword).or()
-                        .like("starsRaw", traditionalCHNKeyword).or()
-                        .like("tagsRaw", keyword).or()
-                        .like("tagsRaw", traditionalCHNKeyword).or()
-                        .like("publishTime", keyword);
+            // 默认使用and, 所以直接使用nested和其他配合也行
+            queryWrapper.and(wrapper -> wrapper.like("title", keyword).or()
+                                               .like("title", traditionalCHNKeyword).or()
+                                               .like("serialNumber", keyword).or()
+                                               .like("starsRaw", keyword).or()
+                                               .like("starsRaw", traditionalCHNKeyword).or()
+                                               .like("tagsRaw", keyword).or()
+                                               .like("tagsRaw", traditionalCHNKeyword).or()
+                                               .like("publishTime", keyword));
         } else if (compoundKeyword != null) {
             for (String ck : compoundKeyword) {
                 String traditionalCHNCK = ZhConverterUtil.toTraditional(ck);
@@ -190,12 +195,14 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             }
             if (publishTimeStart != null && publishTimeEnd != null) { //前端选择器就已经判断先后关系了,此处不必判断,只需判断相等
                 if (Objects.equals(publishTimeStart, publishTimeEnd)) {
-                    queryWrapper.like("publishTime", publishTimeStart);
+                    queryWrapper.and(wrapper -> wrapper.like("publishTime", publishTimeStart));
                 } else {
                     // 主动调用or表示紧接着下一个方法不是用and连接!(不调用or则默认为使用and连接)
                     // 也可以写成链式写法
-                    queryWrapper.ge("publishTime", publishTimeStart);
-                    queryWrapper.le("publishTime", publishTimeEnd);
+//                    queryWrapper.ge("publishTime", publishTimeStart);
+//                    queryWrapper.le("publishTime", publishTimeEnd);
+                    queryWrapper.and(wrapper -> wrapper.ge("publishTime", publishTimeStart)
+                                                       .le("publishTime", publishTimeEnd));
                 }
             }
             if (addTimeStart != null && addTimeEnd != null) { //前端选择器就已经判断先后关系了,此处不必判断,只需判断相等
@@ -204,11 +211,15 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 } else {
                     // 主动调用or表示紧接着下一个方法不是用and连接!(不调用or则默认为使用and连接)
                     // 也可以写成链式写法
-                    queryWrapper.ge("addTime", addTimeStart);
-                    queryWrapper.le("addTime", addTimeEnd);
+//                    queryWrapper.ge("addTime", addTimeStart);
+//                    queryWrapper.le("addTime", addTimeEnd);
+                    queryWrapper.and(wrapper -> wrapper.ge("addTime", addTimeStart)
+                                                       .le("addTime", addTimeEnd));
                 }
             }
         }
+
+        // 过滤相关
         if (onClient == 1) {
             QueryWrapper<VideoOnClient> vocQueryWrapper = new QueryWrapper<>();
             vocQueryWrapper.select("id", "videoId");
@@ -218,6 +229,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 queryWrapper.and(wrapper -> wrapper.in("id", idListOnClient));
             }
         }
+
         IPage<Video> ipage = this.page(page, queryWrapper);
         ipage.convert(this::entity2dto); //如果逻辑复杂一点还可以写成lambda表达式
         STResDTO stRes = new STResDTO();
