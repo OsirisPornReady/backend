@@ -74,7 +74,7 @@ public class VideoController {
                 @RequestParam(value = "addTimeStart", required = false) String addTimeStart,
                 @RequestParam(value = "addTimeEnd", required = false) String addTimeEnd,
                 @RequestParam(value = "compoundKeyword", required = false) List<String> compoundKeyword,
-                @RequestParam(value = "onClient", required = false) Boolean onClient
+                @RequestParam(value = "onClient", required = false, defaultValue = "0") Integer onClient
                             ) {
         return videoService.getByPage(pi, ps, sort, defaultSort, keyword, title, serialNumber, starsRaw, tagsRaw, publishTimeStart, publishTimeEnd, addTimeStart, addTimeEnd, compoundKeyword, onClient);
     }

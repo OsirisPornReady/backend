@@ -115,7 +115,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                               String addTimeStart,
                               String addTimeEnd,
                               List<String> compoundKeyword,
-                              Boolean onClient) {
+                              Integer onClient) {
         Page<Video> page = new Page<>(pi, ps);
         QueryWrapper<Video> queryWrapper = new QueryWrapper<>();
         if (Objects.equals(defaultSort, "null")){
@@ -209,7 +209,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 }
             }
         }
-        if (onClient) {
+        if (onClient == 1) {
             QueryWrapper<VideoOnClient> vocQueryWrapper = new QueryWrapper<>();
             vocQueryWrapper.select("id", "videoId");
             List<VideoOnClient> voclist = videoOnClientService.list(vocQueryWrapper);
