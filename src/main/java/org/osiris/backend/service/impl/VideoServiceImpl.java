@@ -215,7 +215,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             List<VideoOnClient> voclist = videoOnClientService.list(vocQueryWrapper);
             List<Integer> idListOnClient = voclist.stream().map(VideoOnClient::getVideoId).distinct().toList();
             if (idListOnClient.size() > 0) {
-                queryWrapper.in("id", idListOnClient);
+                queryWrapper.and(wrapper -> wrapper.in("id", idListOnClient));
             }
         }
         IPage<Video> ipage = this.page(page, queryWrapper);
