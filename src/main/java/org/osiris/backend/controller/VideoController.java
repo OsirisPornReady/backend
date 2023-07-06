@@ -131,7 +131,6 @@ public class VideoController {
         videoService.updateVideo(videoDTO, videoId);
     }
 
-
     @GetMapping("get_video_id_list_on_client")
     public List<Integer> getVideoIdListOnClient() {
         return videoOnClientService.getVideoIdList();
