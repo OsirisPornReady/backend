@@ -153,7 +153,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         // 搜索相关
         if (keyword != null) {
             String traditionalCHNKeyword = ZhConverterUtil.toTraditional(keyword);
-            // 默认使用and, 所以直接使用nested和其他配合也行
+            // 默认使用and, 所以直接使用nested和其它的配合也行
             queryWrapper.and(wrapper -> wrapper.like("title", keyword).or()
                                                .like("title", traditionalCHNKeyword).or()
                                                .like("serialNumber", keyword).or()
