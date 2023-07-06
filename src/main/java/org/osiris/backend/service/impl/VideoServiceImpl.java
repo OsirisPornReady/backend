@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import com.github.houbb.opencc4j.util.ZhConverterUtil;
 
+import org.osiris.backend.entity.VideoOnClient;
+import org.osiris.backend.service.VideoOnClientService;
 import org.osiris.backend.utils.StringManipUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,12 @@ import org.osiris.backend.utils.DateConvertUtils;
 
 @Service
 public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements VideoService {
+
+    private final VideoOnClientService videoOnClientService;
+
+    public VideoServiceImpl(VideoOnClientService videoOnClientService) {
+        this.videoOnClientService = videoOnClientService;
+    }
 
     @Override
     public Video dto2entity(VideoDTO videoDTO) {
@@ -95,7 +103,19 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     }
 
     @Override
-    public STResDTO getByPage(Integer pi, Integer ps, List<String> sort, String defaultSort, String keyword, String title, String serialNumber, String starsRaw, String tagsRaw, String publishTimeStart, String publishTimeEnd, String addTimeStart, String addTimeEnd, List<String> compoundKeyword) {
+    public STResDTO getByPage(Integer pi, Integer ps,
+                              List<String> sort, String defaultSort,
+                              String keyword,
+                              String title,
+                              String serialNumber,
+                              String starsRaw,
+                              String tagsRaw,
+                              String publishTimeStart,
+                              String publishTimeEnd,
+                              String addTimeStart,
+                              String addTimeEnd,
+                              List<String> compoundKeyword,
+                              Boolean onClient) {
         Page<Video> page = new Page<>(pi, ps);
         QueryWrapper<Video> queryWrapper = new QueryWrapper<>();
         if (Objects.equals(defaultSort, "null")){
@@ -187,6 +207,15 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                     queryWrapper.ge("addTime", addTimeStart);
                     queryWrapper.le("addTime", addTimeEnd);
                 }
+            }
+        }
+        if (onClient) {
+            QueryWrapper<VideoOnClient> vocQueryWrapper = new QueryWrapper<>();
+            vocQueryWrapper.select("id", "videoId");
+            List<VideoOnClient> voclist = videoOnClientService.list(vocQueryWrapper);
+            List<Integer> idListOnClient = voclist.stream().map(VideoOnClient::getVideoId).distinct().toList();
+            if (idListOnClient.size() > 0) {
+                queryWrapper.in("id", idListOnClient);
             }
         }
         IPage<Video> ipage = this.page(page, queryWrapper);
