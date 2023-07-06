@@ -155,18 +155,18 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
             }
         }
         if (keyword != null) {
-            queryWrapper.like("title", keyword).or()
-                        .like("titleJap", keyword).or()
-                        .like("languageTags", keyword).or()
-                        .like("parodyTags", keyword).or()
-                        .like("characterTags", keyword).or()
-                        .like("groupTags", keyword).or()
-                        .like("artistTags", keyword).or()
-                        .like("maleTags", keyword).or()
-                        .like("femaleTags", keyword).or()
-                        .like("mixedTags", keyword).or()
-                        .like("otherTags", keyword).or()
-                        .like("postedTime", keyword);
+            queryWrapper.and(wrapper -> wrapper.like("title", keyword).or()
+                                               .like("titleJap", keyword).or()
+                                               .like("languageTags", keyword).or()
+                                               .like("parodyTags", keyword).or()
+                                               .like("characterTags", keyword).or()
+                                               .like("groupTags", keyword).or()
+                                               .like("artistTags", keyword).or()
+                                               .like("maleTags", keyword).or()
+                                               .like("femaleTags", keyword).or()
+                                               .like("mixedTags", keyword).or()
+                                               .like("otherTags", keyword).or()
+                                               .like("postedTime", keyword));
         } else { //并不需要精准匹配,也就不需要likeleft和likeright
             if (title != null) {
                 queryWrapper.like("title", title);
