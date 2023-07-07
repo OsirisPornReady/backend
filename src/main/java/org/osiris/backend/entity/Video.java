@@ -84,4 +84,6 @@ public class Video {
     private String previewImageBase64List;
     @TableField("chineseTitle")
     private String chineseTitle;
+    @TableField("customTags")
+    private String customTags;
 }

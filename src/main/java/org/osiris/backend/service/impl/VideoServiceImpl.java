@@ -41,12 +41,13 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     public Video dto2entity(VideoDTO videoDTO) {
         Video video = new Video();
 
-        BeanUtils.copyProperties(videoDTO, video, "publishTime", "series", "tags", "stars", "tagsRaw", "starsRaw", "addTime", "updateTime", "videoSrc", "previewImageSrcList", "localPreviewImageSrcList", "previewImageBase64List");
+        BeanUtils.copyProperties(videoDTO, video, "publishTime", "series", "tags", "stars", "tagsRaw", "starsRaw", "addTime", "updateTime", "videoSrc", "previewImageSrcList", "localPreviewImageSrcList", "previewImageBase64List", "customTags");
 
         String tags = ArrayConvertUtils.list2string(videoDTO.getTags());
         String stars = ArrayConvertUtils.list2string(videoDTO.getStars());
         String tagsRaw = ArrayConvertUtils.liststring2string(videoDTO.getTagsRaw());
         String starsRaw = ArrayConvertUtils.liststring2string(videoDTO.getStarsRaw());
+        String customTags = ArrayConvertUtils.liststring2string(videoDTO.getCustomTags());
         String series = ArrayConvertUtils.liststring2string(videoDTO.getSeries());
         String videoSrc = ArrayConvertUtils.liststring2string(videoDTO.getVideoSrc());
         String previewImageSrcList = ArrayConvertUtils.liststring2string(videoDTO.getPreviewImageSrcList());
@@ -60,6 +61,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         video.setStars(stars);
         video.setTagsRaw(tagsRaw);
         video.setStarsRaw(starsRaw);
+        video.setCustomTags(customTags);
         video.setSeries(series);
         video.setVideoSrc(videoSrc);
         video.setPreviewImageSrcList(previewImageSrcList);
@@ -74,11 +76,12 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     @Override
     public VideoDTO entity2dto(Video video) {
         VideoDTO videoDTO = new VideoDTO();
-        BeanUtils.copyProperties(video, videoDTO, "publishTime", "series", "tags", "stars", "tagsRaw", "starsRaw", "addTime", "updateTime", "videoSrc", "previewImageSrcList", "localPreviewImageSrcList", "previewImageBase64List");
+        BeanUtils.copyProperties(video, videoDTO, "publishTime", "series", "tags", "stars", "tagsRaw", "starsRaw", "addTime", "updateTime", "videoSrc", "previewImageSrcList", "localPreviewImageSrcList", "previewImageBase64List", "customTags");
         List<Integer> tags = ArrayConvertUtils.string2list(video.getTags());
         List<Integer> stars = ArrayConvertUtils.string2list(video.getStars());
         List<String> tagsRaw = ArrayConvertUtils.string2stringlist(video.getTagsRaw());
         List<String> starsRaw = ArrayConvertUtils.string2stringlist(video.getStarsRaw());
+        List<String> customTags = ArrayConvertUtils.string2stringlist(video.getCustomTags());
         List<String> series = ArrayConvertUtils.string2stringlist(video.getSeries());
         List<String> videoSrc = ArrayConvertUtils.string2stringlist(video.getVideoSrc());
         List<String> previewImageSrcList = ArrayConvertUtils.string2stringlist(video.getPreviewImageSrcList());
@@ -87,10 +90,12 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         Date publishTime = DateConvertUtils.string2date(video.getPublishTime());
         Date addTime = DateConvertUtils.string2date(video.getAddTime());
         Date updateTime = DateConvertUtils.string2date(video.getUpdateTime());
+
         videoDTO.setTags(tags);
         videoDTO.setStars(stars);
         videoDTO.setTagsRaw(tagsRaw);
         videoDTO.setStarsRaw(starsRaw);
+        videoDTO.setCustomTags(customTags);
         videoDTO.setSeries(series);
         videoDTO.setVideoSrc(videoSrc);
         videoDTO.setPreviewImageSrcList(previewImageSrcList);
@@ -161,6 +166,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                                                .like("starsRaw", traditionalCHNKeyword).or()
                                                .like("tagsRaw", keyword).or()
                                                .like("tagsRaw", traditionalCHNKeyword).or()
+                                               .like("customTags", keyword).or()
+                                               .like("customTags", traditionalCHNKeyword).or()
                                                .like("publishTime", keyword));
         } else if (compoundKeyword != null) {
             for (String ck : compoundKeyword) {
@@ -172,6 +179,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                                                    .like("starsRaw", traditionalCHNCK).or()
                                                    .like("tagsRaw", ck).or()
                                                    .like("tagsRaw", traditionalCHNCK).or()
+                                                   .like("customTags", ck).or()
+                                                   .like("customTags", traditionalCHNCK).or()
                                                    .like("publishTime", ck));
             }
         } else { //并不需要精准匹配,也就不需要likeleft和likeright

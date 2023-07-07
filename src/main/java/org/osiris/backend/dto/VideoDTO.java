@@ -50,4 +50,5 @@ public class VideoDTO {
     private String coverBase64;
     private List<String> previewImageBase64List;
     private String chineseTitle;
+    private List<String> customTags;
 }
