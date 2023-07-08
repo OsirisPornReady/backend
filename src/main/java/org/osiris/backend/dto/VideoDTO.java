@@ -51,4 +51,5 @@ public class VideoDTO {
     private List<String> previewImageBase64List;
     private String chineseTitle;
     private List<String> customTags;
+    private Integer customSortOrder;
 }

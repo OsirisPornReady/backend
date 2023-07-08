@@ -310,4 +310,31 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             this.update(updateWrapper);
         }
     }
+
+    @Override
+    public void swapCustomSortOrder(Integer idA, Integer idB) {
+        QueryWrapper<Video> queryWrapperA = new QueryWrapper<>();
+        queryWrapperA.select("id", "customSortOrder").lambda().eq(Video::getId, idA);
+        Video recordA = this.getOne(queryWrapperA);
+
+        QueryWrapper<Video> queryWrapperB = new QueryWrapper<>();
+        queryWrapperB.select("id", "customSortOrder").lambda().eq(Video::getId, idB);
+        Video recordB = this.getOne(queryWrapperB);
+
+        if (recordA.getCustomSortOrder() != null && recordB.getCustomSortOrder() != null) {
+            Integer customSortOrderA = this.getOne(queryWrapperA).getCustomSortOrder();
+            Integer customSortOrderB = this.getOne(queryWrapperB).getCustomSortOrder();
+
+            UpdateWrapper<Video> updateWrapperA = new UpdateWrapper<>();
+            UpdateWrapper<Video> updateWrapperB = new UpdateWrapper<>();
+
+            updateWrapperA.eq("id", idA).set("customSortOrder", customSortOrderB);
+            updateWrapperB.eq("id", idB).set("customSortOrder", customSortOrderA);
+
+            this.update(updateWrapperA);
+            this.update(updateWrapperB);
+        } else {
+            throw new RuntimeException("待交换项未配置customSortOrder");
+        }
+    }
 }

@@ -145,4 +145,13 @@ public class VideoController {
     public void pullVideoOffClient(@PathVariable Integer videoId) {
         videoOnClientService.pullVideoOffClient(videoId);
     }
+
+    @GetMapping("swap_custom_sort_order")
+    public void swapCustomSortOrder(
+            @RequestParam(value = "idA") Integer idA,
+            @RequestParam(value = "idB") Integer idB
+    ) {
+        videoService.swapCustomSortOrder(idA, idB);
+    }
+
 }

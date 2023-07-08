@@ -18,4 +18,5 @@ public interface VideoService extends IService<Video> {
     public Boolean isSerialNumberExist(String serialNumber);
     public Boolean isTitleExist(String title);
     public void switchVideoSubscription(Integer id);
+    public void swapCustomSortOrder(Integer idA, Integer idB);
 }

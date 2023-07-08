@@ -86,4 +86,6 @@ public class Video {
     private String chineseTitle;
     @TableField("customTags")
     private String customTags;
+    @TableField("customSortOrder")
+    private Integer customSortOrder;
 }
