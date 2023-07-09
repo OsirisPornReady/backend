@@ -168,7 +168,11 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                                                .like("tagsRaw", traditionalCHNKeyword).or()
                                                .like("customTags", keyword).or()
                                                .like("customTags", traditionalCHNKeyword).or()
-                                               .like("publishTime", keyword));
+                                               .like("publishTime", keyword).or()
+                                               .like("brand", keyword).or()
+                                               .like("series", keyword).or()
+                                               .like("producer", keyword).or()
+                                               .like("releaser", keyword).or());
         } else if (compoundKeyword != null) {
             for (String ck : compoundKeyword) {
                 String traditionalCHNCK = ZhConverterUtil.toTraditional(ck);
@@ -181,7 +185,11 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                                                    .like("tagsRaw", traditionalCHNCK).or()
                                                    .like("customTags", ck).or()
                                                    .like("customTags", traditionalCHNCK).or()
-                                                   .like("publishTime", ck));
+                                                   .like("publishTime", ck).or()
+                                                   .like("brand", keyword).or()
+                                                   .like("series", keyword).or()
+                                                   .like("producer", keyword).or()
+                                                   .like("releaser", keyword).or());
             }
         } else { //并不需要精准匹配,也就不需要likeleft和likeright
             if (title != null) {
