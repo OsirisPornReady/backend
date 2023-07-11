@@ -54,4 +54,5 @@ public class ComicDTO {
     private String coverBase64;
     private Boolean integrity;
     private String chineseTitle;
+    private List<String> customTags;
 }

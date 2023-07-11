@@ -74,9 +74,10 @@ public class ComicController {
                 @RequestParam(value = "postedTimeStart", required = false) String postedTimeStart,
                 @RequestParam(value = "postedTimeEnd", required = false) String postedTimeEnd,
                 @RequestParam(value = "addTimeStart", required = false) String addTimeStart,
-                @RequestParam(value = "addTimeEnd", required = false) String addTimeEnd
+                @RequestParam(value = "addTimeEnd", required = false) String addTimeEnd,
+                @RequestParam(value = "compoundKeyword", required = false) List<String> compoundKeyword
                             ) {
-        return comicService.getByPage(pi, ps, sort, defaultSort, keyword, title, titleJap, languageTags, parodyTags, characterTags, groupTags, artistTags, maleTags, femaleTags, mixedTags, otherTags, postedTimeStart, postedTimeEnd, addTimeStart, addTimeEnd);
+        return comicService.getByPage(pi, ps, sort, defaultSort, keyword, title, titleJap, languageTags, parodyTags, characterTags, groupTags, artistTags, maleTags, femaleTags, mixedTags, otherTags, postedTimeStart, postedTimeEnd, addTimeStart, addTimeEnd, compoundKeyword);
     }
 
     @GetMapping("/get_select_all")

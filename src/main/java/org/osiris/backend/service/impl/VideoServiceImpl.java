@@ -171,8 +171,11 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                                                .like("publishTime", keyword).or()
                                                .like("brand", keyword).or()
                                                .like("series", keyword).or()
+                                               .like("series", traditionalCHNKeyword).or()
                                                .like("producer", keyword).or()
-                                               .like("releaser", keyword).or());
+                                               .like("producer", traditionalCHNKeyword).or()
+                                               .like("releaser", keyword).or()
+                                               .like("releaser", traditionalCHNKeyword).or());
         } else if (compoundKeyword != null) {
             for (String ck : compoundKeyword) {
                 String traditionalCHNCK = ZhConverterUtil.toTraditional(ck);
@@ -186,10 +189,13 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                                                    .like("customTags", ck).or()
                                                    .like("customTags", traditionalCHNCK).or()
                                                    .like("publishTime", ck).or()
-                                                   .like("brand", keyword).or()
-                                                   .like("series", keyword).or()
-                                                   .like("producer", keyword).or()
-                                                   .like("releaser", keyword).or());
+                                                   .like("brand", ck).or()
+                                                   .like("series", ck).or()
+                                                   .like("series", traditionalCHNCK).or()
+                                                   .like("producer", ck).or()
+                                                   .like("producer", traditionalCHNCK).or()
+                                                   .like("releaser", ck).or()
+                                                   .like("releaser", traditionalCHNCK).or());
             }
         } else { //并不需要精准匹配,也就不需要likeleft和likeright
             if (title != null) {

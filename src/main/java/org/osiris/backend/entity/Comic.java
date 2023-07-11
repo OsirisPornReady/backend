@@ -96,4 +96,6 @@ public class Comic {
     private Boolean integrity;
     @TableField("chineseTitle")
     private String chineseTitle;
+    @TableField("customTags")
+    private String customTags;
 }

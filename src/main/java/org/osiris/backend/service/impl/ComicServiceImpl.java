@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.houbb.opencc4j.util.ZhConverterUtil;
 import org.osiris.backend.dto.STResDTO;
 import org.osiris.backend.dto.ComicDTO;
 import org.osiris.backend.entity.Comic;
@@ -38,6 +39,7 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
         String femaleTags = ArrayConvertUtils.liststring2string(comicDTO.getFemaleTags());
         String mixedTags = ArrayConvertUtils.liststring2string(comicDTO.getMixedTags());
         String otherTags = ArrayConvertUtils.liststring2string(comicDTO.getOtherTags());
+        String customTags = ArrayConvertUtils.liststring2string(comicDTO.getCustomTags());
 
         String series = ArrayConvertUtils.liststring2string(comicDTO.getSeries());
         String comicSrc = ArrayConvertUtils.liststring2string(comicDTO.getComicSrc());
@@ -69,6 +71,7 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
         comic.setPostedTime(postedTime);
         comic.setAddTime(addTime);
         comic.setUpdateTime(updateTime);
+        comic.setCustomTags(customTags);
 
         return comic;
     }
@@ -87,6 +90,8 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
         List<String> femaleTags = ArrayConvertUtils.string2stringlist(comic.getFemaleTags());
         List<String> mixedTags = ArrayConvertUtils.string2stringlist(comic.getMixedTags());
         List<String> otherTags = ArrayConvertUtils.string2stringlist(comic.getOtherTags());
+        List<String> customTags = ArrayConvertUtils.string2stringlist(comic.getCustomTags());
+
         List<String> series = ArrayConvertUtils.string2stringlist(comic.getSeries());
         List<String> comicSrc = ArrayConvertUtils.string2stringlist(comic.getComicSrc());
         List<String> previewImageSrcList = ArrayConvertUtils.string2stringlist(comic.getPreviewImageSrcList());
@@ -107,6 +112,7 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
         comicDTO.setFemaleTags(femaleTags);
         comicDTO.setMixedTags(mixedTags);
         comicDTO.setOtherTags(otherTags);
+        comicDTO.setCustomTags(customTags);
         comicDTO.setSeries(series);
         comicDTO.setComicSrc(comicSrc);
         comicDTO.setPreviewImageSrcList(previewImageSrcList);
@@ -122,7 +128,25 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
     }
 
     @Override
-    public STResDTO getByPage(Integer pi, Integer ps, List<String> sort, String defaultSort, String keyword, String title, String titleJap, String languageTags, String parodyTags, String characterTags, String groupTags, String artistTags, String maleTags, String femaleTags, String mixedTags, String otherTags, String postedTimeStart, String postedTimeEnd, String addTimeStart, String addTimeEnd) {
+    public STResDTO getByPage(Integer pi, Integer ps,
+                              List<String> sort, String defaultSort,
+                              String keyword,
+                              String title,
+                              String titleJap,
+                              String languageTags,
+                              String parodyTags,
+                              String characterTags,
+                              String groupTags,
+                              String artistTags,
+                              String maleTags,
+                              String femaleTags,
+                              String mixedTags,
+                              String otherTags,
+                              String postedTimeStart,
+                              String postedTimeEnd,
+                              String addTimeStart,
+                              String addTimeEnd,
+                              List<String> compoundKeyword) {
         Page<Comic> page = new Page<>(pi, ps);
         QueryWrapper<Comic> queryWrapper = new QueryWrapper<>();
         if (Objects.equals(defaultSort, "null")){
@@ -155,8 +179,11 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
             }
         }
         if (keyword != null) {
+            String traditionalCHNKeyword = ZhConverterUtil.toTraditional(keyword);
             queryWrapper.and(wrapper -> wrapper.like("title", keyword).or()
+                                               .like("title", traditionalCHNKeyword).or()
                                                .like("titleJap", keyword).or()
+                                               .like("titleJap", traditionalCHNKeyword).or()
                                                .like("languageTags", keyword).or()
                                                .like("parodyTags", keyword).or()
                                                .like("characterTags", keyword).or()
@@ -167,6 +194,24 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
                                                .like("mixedTags", keyword).or()
                                                .like("otherTags", keyword).or()
                                                .like("postedTime", keyword));
+        } else if (compoundKeyword != null) {
+            for (String ck : compoundKeyword) {
+                String traditionalCHNCK = ZhConverterUtil.toTraditional(ck);
+                queryWrapper.and(wrapper -> wrapper.like("title", ck).or()
+                                                   .like("title", traditionalCHNCK).or()
+                                                   .like("titleJap", ck).or()
+                                                   .like("titleJap", traditionalCHNCK).or()
+                                                   .like("languageTags", ck).or()
+                                                   .like("parodyTags", ck).or()
+                                                   .like("characterTags", ck).or()
+                                                   .like("groupTags", ck).or()
+                                                   .like("artistTags", ck).or()
+                                                   .like("maleTags", ck).or()
+                                                   .like("femaleTags", ck).or()
+                                                   .like("mixedTags", ck).or()
+                                                   .like("otherTags", ck).or()
+                                                   .like("postedTime", ck));
+            }
         } else { //并不需要精准匹配,也就不需要likeleft和likeright
             if (title != null) {
                 queryWrapper.like("title", title);
